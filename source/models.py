@@ -19,7 +19,7 @@ class Propriedade(models.Model):
 
 
 class Renda(models.Model):
-    nome = models.TextField(max_length=100)
+    nome = models.CharField(max_length=100)
     pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     valor = models.DecimalField(max_digits=15, decimal_places=2)
     data = models.DateField()
@@ -56,8 +56,9 @@ class Despesa(models.Model):
     propriedade = models.ForeignKey(Propriedade, on_delete=models.CASCADE, null=True, blank=True)
     meta = models.ForeignKey(Meta, on_delete=models.CASCADE, null=True, blank=True)
     valor = models.DecimalField(max_digits=15, decimal_places=2)
-    data = models.DateField()
-    vencimento = models.DateField(null=True, blank=True)
+    data_criacao = models.DateField()
+    data_vencimento = models.DateField(null=True, blank=True)
+    data_pagamento = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.nome} - R${self.valor}'
