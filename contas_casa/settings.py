@@ -25,8 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'source'
+    'django.contrib.staticfiles',    
+    'source',
+    'django_cleanup.apps.CleanupConfig'
 ]
 
 MIDDLEWARE = [
@@ -108,8 +109,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'source/templates/static'),]
+STATIC_URL = 'source/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'source/static'),]
+MEDIA_ROOT = 'source/midias/'
+MEDIA_URL = '/midias/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

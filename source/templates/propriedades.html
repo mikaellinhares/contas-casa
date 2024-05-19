@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/propriedades.css' %}">
+{% endblock %}
+
+{% block 'script' %}
+<script type="text/javascript" src={% static 'js/propriedades.js' %}></script>
+<script>selecionarItemSidebar('side-item-propriedades')</script>
+{% endblock %}
+
+{% block 'title' %}
+Propriedades
+{% endblock%}
+
+{% block 'body' %}
+<div class="main-container">
+    <h1>Propriedades</h1>
+
+    <div class="container-propriedades">
+      {% for propriedade in propriedades %}
+      <div class="card-propriedades">
+        <img class="card-imagem" 
+        src="{% if propriedade.imagem %}{{ propriedade.imagem.url }}
+             {% else %}{% static 'img/propriedades-default.jpg' %}{% endif %}">
+        <div class="card-conteudo">
+          <h5 class="card-titulo">{{ propriedade.nome }}</h5>
+          <p class="card-descricao">{{ propriedade.descricao }}</p>
+        </div>
+        <button class="card-botao btn btn-primary">Acessar</button>
+      </div>
+      {% endfor %}
+    </div>
+</div>
+{% endblock %}

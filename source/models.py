@@ -9,9 +9,14 @@ class Pessoa(models.Model):
     def __str__(self):
         return self.nome
 
+    def nascimento_padrao(self) -> str:
+        return '-'.join(reversed(str(self.nascimento).split('/')))
+
 
 class Propriedade(models.Model):
     nome = models.CharField(max_length=50)
+    descricao = models.TextField(max_length=75, null=True)
+    imagem = models.ImageField(upload_to='propriedades', null=True);
     pessoas = models.ManyToManyField(Pessoa)
 
     def __str__(self):
