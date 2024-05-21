@@ -11,3 +11,8 @@ def pessoas(request):
 def propriedades(request):
     propriedades = Propriedade.objects.all()
     return render(request, template_name='propriedades.html', context={'propriedades': propriedades})
+
+
+def propriedade(request, id_propriedade: int):
+    propriedade = Propriedade.objects.get(id=id_propriedade)
+    return render(request, template_name='propriedade.html', context={'propriedade': propriedade})

@@ -28,7 +28,11 @@ Propriedades
           <h5 class="card-titulo">{{ propriedade.nome }}</h5>
           <p class="card-descricao">{{ propriedade.descricao }}</p>
         </div>
-        <button class="card-botao btn btn-primary">Acessar</button>
+        <button 
+          class="card-botao btn btn-primary"
+          OnClick="acessarPropriedade('{% url 'propriedade' id_propriedade=propriedade.id %}')">
+          Acessar
+        </button>
       </div>
       {% endfor %}
     </div>

@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     path('pessoas/', views.pessoas, name='pessoas'),
     path('propriedades/', views.propriedades, name='propriedades'),
+    path('propriedades/<int:id_propriedade>', views.propriedade, name='propriedade'),
     # path('metas/', views.metas, name='metas'),
     # path('categorias/', views.categorias, name='categorias'),
     # path('despesas/', views.despesas, name='despesas'),

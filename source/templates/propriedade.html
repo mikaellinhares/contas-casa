@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/propriedade.css' %}">
+{% endblock %}
+
+{% block 'script' %}
+<script type="text/javascript" src={% static 'js/propriedade.js' %}></script>
+<script>selecionarItemSidebar('side-item-propriedades')</script>
+{% endblock %}
+
+{% block 'title' %}
+Propriedade
+{% endblock%}
+
+{% block 'body' %}
+<div class="main-container">
+    <h1>{{ propriedade.nome }}</h1>
+    <h2>{{ propriedade.descricao }}</h2>
+    <img href=>
+</div>
+{% endblock %}
