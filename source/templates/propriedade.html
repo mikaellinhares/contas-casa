@@ -16,8 +16,31 @@ Propriedade
 
 {% block 'body' %}
 <div class="main-container">
-    <h1>{{ propriedade.nome }}</h1>
-    <h2>{{ propriedade.descricao }}</h2>
-    <img href=>
+    <div class="display-propriedade">
+        <div class="display-informacoes">
+            <h1>{{ propriedade.nome }}</h1>
+            <p>{{ propriedade.descricao }}</p>
+        </div>
+        <img class="display-imagem" 
+        src="{% if propriedade.imagem %}{{ propriedade.imagem.url }}
+                {% else %}{% static 'img/propriedades-default.jpg' %}{% endif %}">
+    </div>
+
+    <div class="display-propriedade-informacoes">
+        <div class="display-financeiro"></div>
+        <div class="display-pessoas">
+            {% for pessoa in propriedade.pessoas.all %}
+            <div class="card-pessoa">
+                <img class="pessoa-imagem" 
+                     src="{% if pessoa.imagem %}{{ pessoa.imagem.url }}
+                          {% else %}{% static 'img/pessoas-default.png' %}{% endif %}">
+                <div class="pessoa-informacoes">
+                    <h4>{{ pessoa.nome }}</h4>
+                    <span class="badge alert-success">R$ {{ pessoa.saldo }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}
