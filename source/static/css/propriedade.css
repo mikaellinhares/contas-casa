@@ -47,14 +47,15 @@
     column-gap: 24px;
 }
 
-.display-propriedade-informacoes div {
+.display-financeiro, .display-pessoas {
     border-radius: 8px;
     padding: 14px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: white;
 }
 
 .display-financeiro {
-    flex: 2;
+    flex: 3;
     height: 100%;
     border: solid 2px green
 }
@@ -71,8 +72,10 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 16px;
     background-color: #e3e9f7;
+    padding: 16px;
+    border-radius: 8px;
 }
 
 .pessoa-imagem {
@@ -82,10 +85,20 @@
 }
 
 .pessoa-informacoes {
-    width: calc(100% - 80px);
-    box-shadow: none !important;
     background-color: #e3e9f7;
+    flex: 2;
 
     border: solid 2px red;
+}
+
+.pessoa-informacoes span {
+    font-size: 16px;
+}
+
+.pessoa-visualizar {
+    border-radius: 8px;
+    padding: 14px;
+    cursor: pointer;
+    background-color: #0c2b68;
 }
 
