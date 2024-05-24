@@ -43,6 +43,66 @@ Propriedade
                 </button>
             </div>
             {% endfor %}
+
+            <!---->
+            {% for pessoa in propriedade.pessoas.all %}
+            <div class="card-pessoa">
+                <img class="pessoa-imagem" 
+                     src="{% if pessoa.imagem %}{{ pessoa.imagem.url }}
+                          {% else %}{% static 'img/pessoas-default.png' %}{% endif %}">
+                <div class="pessoa-informacoes">
+                    <h4>{{ pessoa.nome }}</h4>
+                    <span class="badge alert-success">R$ {{ pessoa.saldo }}</span>
+                </div>
+                <button class="pessoa-visualizar btn">
+                    <span class="material-icons">visibility</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% for pessoa in propriedade.pessoas.all %}
+            <div class="card-pessoa">
+                <img class="pessoa-imagem" 
+                     src="{% if pessoa.imagem %}{{ pessoa.imagem.url }}
+                          {% else %}{% static 'img/pessoas-default.png' %}{% endif %}">
+                <div class="pessoa-informacoes">
+                    <h4>{{ pessoa.nome }}</h4>
+                    <span class="badge alert-success">R$ {{ pessoa.saldo }}</span>
+                </div>
+                <button class="pessoa-visualizar btn">
+                    <span class="material-icons">visibility</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% for pessoa in propriedade.pessoas.all %}
+            <div class="card-pessoa">
+                <img class="pessoa-imagem" 
+                     src="{% if pessoa.imagem %}{{ pessoa.imagem.url }}
+                          {% else %}{% static 'img/pessoas-default.png' %}{% endif %}">
+                <div class="pessoa-informacoes">
+                    <h4>{{ pessoa.nome }}</h4>
+                    <span class="badge alert-success">R$ {{ pessoa.saldo }}</span>
+                </div>
+                <button class="pessoa-visualizar btn">
+                    <span class="material-icons">visibility</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% for pessoa in propriedade.pessoas.all %}
+            <div class="card-pessoa">
+                <img class="pessoa-imagem" 
+                     src="{% if pessoa.imagem %}{{ pessoa.imagem.url }}
+                          {% else %}{% static 'img/pessoas-default.png' %}{% endif %}">
+                <div class="pessoa-informacoes">
+                    <h4>{{ pessoa.nome }}</h4>
+                    <span class="badge alert-success">R$ {{ pessoa.saldo }}</span>
+                </div>
+                <button class="pessoa-visualizar btn">
+                    <span class="material-icons">visibility</span>
+                </button>
+            </div>
+            {% endfor %}
+            <!---->
+
         </div>
     </div>
 </div>
