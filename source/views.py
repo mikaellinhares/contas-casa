@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Pessoa, Propriedade
+from django.shortcuts import render, redirect
+from .models import Pessoa, Propriedade, Despesa
 
 
 # Create your views here.
@@ -14,5 +14,15 @@ def propriedades(request):
 
 
 def propriedade(request, id_propriedade: int):
+    request.session['id_propriedade'] = id_propriedade
     propriedade = Propriedade.objects.get(id=id_propriedade)
     return render(request, template_name='propriedade.html', context={'propriedade': propriedade})
+
+
+def despesas(request):
+    id_propriedade = request.session.get('id_propriedade')
+    if not id_propriedade:
+        return redirect('propriedades')
+
+    despesas = Despesa.objects.get(propriedade=id_propriedade)
+    return render(request, template_name='despesas.html', context={'despesas': despesas})
