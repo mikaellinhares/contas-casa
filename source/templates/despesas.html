@@ -16,6 +16,31 @@ Despesas
 
 {% block 'body' %}
 <div class="main-container">
-  
+    <div class="despesas-totais">
+        <div class="card-total card-divida bg-danger">
+            <h1>Dívidas</h1>
+            <p>R$ 10.000,00</p>
+        </div>
+        <div class="card-total card-pago bg-success">
+            <h1>Pago</h1>
+            <p>R$ 10.000,00</p>
+        </div>
+        <div class="card-total card-pendente bg-warning">
+            <h1>Pendente</h1>
+            <p>R$ 10.000,00</p>
+        </div>
+        <div class="card-total card-parcelado bg-info">
+            <h1>Parcelado</h1>
+            <p>R$ 10.000,00</p>
+        </div>
+    </div>
+    <div class="despesas-filtros"></div>
+    <div class="despesas-lista">
+        {% if despesas %}
+        {% for despesa in despesas %}
+        {{ despesa }}
+        {% endfor %}
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

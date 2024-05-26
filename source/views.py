@@ -24,5 +24,5 @@ def despesas(request):
     if not id_propriedade:
         return redirect('propriedades')
 
-    despesas = Despesa.objects.get(propriedade=id_propriedade)
+    despesas = Despesa.objects.all().filter(propriedade=id_propriedade)
     return render(request, template_name='despesas.html', context={'despesas': despesas})
