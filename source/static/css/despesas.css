@@ -24,32 +24,34 @@
     min-width: 300px;
     width: 320px;
     height: 20vh;
-    border-radius: 16px;
+    border-radius: 8px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     color: white;
+}
+
+.card-total h2 {
+    color: white;
+    margin: 0;
+    padding: 8px 14px;
 }
 
 .card-total h1 {
     color: white;
     margin: 0;
     padding: 8px 14px;
+    font-size: 40px;
 }
 
-.card-total p {
-    color: white;
-    margin: 0;
-    padding: 8px 14px;
-    font-size: 48px;
+.despesas-filtros {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-items: center;
+    gap: 12px;
+    border: solid 5px red;
 }
 
-.card-divida {
-}
-
-.card-pago {
-}
-
-.card-pendente {
-}
-
-.card-parcelado {
+.despesas-filtros .filtro-select {
+    width: 15%;    
 }

@@ -18,23 +18,36 @@ Despesas
 <div class="main-container">
     <div class="despesas-totais">
         <div class="card-total card-divida bg-danger">
-            <h1>Dívidas</h1>
-            <p>R$ 10.000,00</p>
+            <h2>Dívidas</h2>
+            <h1>R$ 10.000,00</h1>
         </div>
         <div class="card-total card-pago bg-success">
-            <h1>Pago</h1>
-            <p>R$ 10.000,00</p>
+            <h2>Pago</h2>
+            <h1>R$ 10.000,00</h1>
         </div>
         <div class="card-total card-pendente bg-warning">
-            <h1>Pendente</h1>
-            <p>R$ 10.000,00</p>
+            <h2>Pendente</h2>
+            <h1>R$ 10.000,00</h1>
         </div>
         <div class="card-total card-parcelado bg-info">
-            <h1>Parcelado</h1>
-            <p>R$ 10.000,00</p>
+            <h2>Parcelado</h2>
+            <h1>R$ 10.000,00</h1>
         </div>
     </div>
-    <div class="despesas-filtros"></div>
+    <div class="despesas-filtros">
+        <select class="filtro-select custom-select">
+            <option selected>Categoria</option>
+            <option value="1">Mercado</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+        <select class="filtro-select custom-select">
+            <option selected>Tipo de Data</option>
+            <option value="criacao">Criação</option>
+            <option value="pagamento">Pagamento</option>
+            <option value="vencimento">Vencimento</option>
+        </select>
+    </div>
     <div class="despesas-lista">
         {% if despesas %}
         {% for despesa in despesas %}
