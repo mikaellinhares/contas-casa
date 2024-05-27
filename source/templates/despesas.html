@@ -49,11 +49,39 @@ Despesas
         </select>
     </div>
     <div class="despesas-lista">
-        {% if despesas %}
-        {% for despesa in despesas %}
-        {{ despesa }}
-        {% endfor %}
-        {% endif %}
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Criação</th>
+                <th scope="col">Vencimento</th>
+                <th scope="col">Pagamento</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% if despesas %}
+            {% for despesa in despesas %}  
+              <tr class="{% if despesa.data_pagamento %}
+                            bg-success
+                         {% elif despesa.data_vencimento > hoje %}
+                            bg-danger
+                         {% else %}
+                            bg-warning
+                         {% endif %}">
+                <td>{{ despesa.nome }}</td>
+                <td>{{ despesa.categoria }}</td>
+                <td>{{ despesa.valor }}</td>
+                <td>{{ despesa.data_criacao }}</td>
+                <td>{{ despesa.data_vencimento }}</td>
+                <td>{{ despesa.data_pagamento }}</td>
+                <td><button class="btn btn-success">Pagamentos</button></td>
+              </tr>
+            {% endfor %}
+            {% endif %}
+            </tbody>
+          </table>
     </div>
 </div>
 {% endblock %}

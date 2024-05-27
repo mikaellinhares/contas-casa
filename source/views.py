@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Pessoa, Propriedade, Despesa
+from datetime import datetime
 
 
 # Create your views here.
@@ -25,4 +26,4 @@ def despesas(request):
         return redirect('propriedades')
 
     despesas = Despesa.objects.all().filter(propriedade=id_propriedade)
-    return render(request, template_name='despesas.html', context={'despesas': despesas})
+    return render(request, template_name='despesas.html', context={'despesas': despesas, 'hoje': datetime.today()})
