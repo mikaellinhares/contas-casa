@@ -65,15 +65,6 @@ class Despesa(models.Model):
     data_vencimento = models.DateField(null=True, blank=True)
     data_pagamento = models.DateField(null=True, blank=True)
 
-    def get_data_criacao(self):
-        return self.data_criacao if self.data_criacao else ''
-
-    def get_data_vencimento(self):
-        return self.data_vencimento if self.data_vencimento else ''
-
-    def get_data_pagamento(self):
-        return self.data_pagamento if self.data_pagamento else ''
-
     def __str__(self):
         return f'{self.nome} - R${self.valor}'
 

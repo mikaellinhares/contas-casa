@@ -30,4 +30,5 @@ def despesas(request):
         return redirect('propriedades')
 
     despesas = Despesa.objects.all().filter(propriedade=id_propriedade)
+    # Pagamentos da despesa: despesa.pagamento_set.all()
     return render(request, template_name='despesas.html', context={'despesas': despesas, 'hoje': datetime.today()})

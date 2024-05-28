@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',    
-    'source',
+    'source', # Poderia ser assim: 'source.apps.SourceConfig'
     'django_cleanup.apps.CleanupConfig'
 ]
 
