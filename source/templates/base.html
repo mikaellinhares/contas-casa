@@ -17,23 +17,23 @@
     {% endblock %}
 </header>
 
-<body>      
+<body>     
     <nav id="sidebar">
-      <div id="sidebar_content">
-          <div id="user">
-              <img id="user_avatar" src="https://avatars.githubusercontent.com/u/101295609?v=4" alt="Avatar">
-  
-              <p id="user_infos">
-                  <span class="item-description">
-                      Mikael Linhares
-                  </span>
-                  <span class="item-description">
-                      Desenvolvedor
-                  </span>
-              </p>
-          </div>
-  
-          <ul id="side_items">
+        <div id="sidebar_content">
+            <div id="user">
+                <img id="user_avatar" src="https://avatars.githubusercontent.com/u/101295609?v=4" alt="Avatar">
+
+                <p id="user_infos">
+                    <span class="item-description">
+                        Mikael Linhares
+                    </span>
+                    <span class="item-description">
+                        Desenvolvedor
+                    </span>
+                </p>
+            </div>
+
+            <ul id="side_items">
             <li class="side-item" id="side-item-pessoas">
                 <a href="{% url 'pessoas' %}">
                     <span class="material-icons bi pe-none me-2">groups</span>
@@ -43,52 +43,52 @@
                 </a>
             </li>
 
-              <li class="side-item" id="side-item-propriedades">
-                  <a href="{% url 'propriedades' %}">
-                      <span class="material-icons bi pe-none me-2">home</span>
-                      <span class="item-description">
-                          Propriedades
-                      </span>
-                  </a>
-              </li>
-  
-              <li class="side-item" id="side-item-metas">
-                  <a href="#">
-                      <span class="material-icons bi pe-none me-2">check_box</span>
-                      <span class="item-description">
-                          Metas
-                      </span>
-                  </a>
-              </li>
-  
-              <li class="side-item" id="side-item-categorias">
-                  <a href="#">
-                      <span class="material-icons bi pe-none me-2">label</span>
-                      <span class="item-description">
-                          Categorias
-                      </span>
-                  </a>
-              </li>
-  
-              <li class="side-item" id="side-item-despesas">
-                  <a href="{% url 'despesas' %}">
-                      <span class="material-icons bi pe-none me-2">credit_card_off</span>
-                      <span class="item-description">
-                          Despesas
-                      </span>
-                  </a>
-              </li>
-  
-              <li class="side-item" id="side-item-pagamentos">
-                  <a href="#">
-                      <span class="material-icons bi pe-none me-2">credit_score</span>
-                      <span class="item-description">
-                          Pagamentos
-                      </span>
-                  </a>
-              </li>
+                <li class="side-item" id="side-item-propriedades">
+                    <a href="{% url 'propriedades' %}">
+                        <span class="material-icons bi pe-none me-2">home</span>
+                        <span class="item-description">
+                            Propriedades
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item" id="side-item-metas">
+                    <a href="#">
+                        <span class="material-icons bi pe-none me-2">check_box</span>
+                        <span class="item-description">
+                            Metas
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item" id="side-item-categorias">
+                    <a href="#">
+                        <span class="material-icons bi pe-none me-2">label</span>
+                        <span class="item-description">
+                            Categorias
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item" id="side-item-despesas">
+                    <a href="{% url 'despesas' %}">
+                        <span class="material-icons bi pe-none me-2">credit_card_off</span>
+                        <span class="item-description">
+                            Despesas
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item" id="side-item-pagamentos">
+                    <a href="#">
+                        <span class="material-icons bi pe-none me-2">credit_score</span>
+                        <span class="item-description">
+                            Pagamentos
+                        </span>
+                    </a>
+                </li>
                 
-              <li class="side-item" id="side-item-rendas">
+                <li class="side-item" id="side-item-rendas">
                 <a href="#">
                     <span class="material-icons bi pe-none me-2">attach_money</span>
                     <span class="item-description">
@@ -96,31 +96,41 @@
                     </span>
                 </a>
             </li>
-          </ul>
-  
-          <button id="open_btn">
-              <span id="open_btn_icon" class="material-icons">arrow_forward</span>
-          </button>
-      </div>
+            </ul>
 
-      <div id="logout">
-          <button id="logout_btn">
-              <span class="material-icons">logout</span>
-              <span class="item-description">
-                  Logout
-              </span>
-          </button>
-      </div>
-  </nav>
+            <button id="open_btn">
+                <span id="open_btn_icon" class="material-icons">arrow_forward</span>
+            </button>
+        </div>
 
-  <main>
+        <div id="logout">
+            <button id="logout_btn">
+                <span class="material-icons">logout</span>
+                <span class="item-description">
+                    Logout
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mensagens -->
+    <div id="display-mensagens">
+        {% if messages %}
+        {% for message in messages %}
+        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <!---->
+
+    <main>
     {% block 'body' %}
     {% endblock %}
-  </main>
+    </main>
 
-  <script type="text/javascript" src={% static 'js/base.js' %}></script>
-  {% block 'script' %}
-  {% endblock %}
+    <script type="text/javascript" src={% static 'js/base.js' %}></script>
+    {% block 'script' %}
+    {% endblock %}
 </body>
 
 <footer>
