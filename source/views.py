@@ -12,6 +12,9 @@ def pessoas(request):
 
 def propriedades(request):
     propriedades = Propriedade.objects.all()
+
+    messages.add_message(request, messages.INFO, "Hello world.")
+
     return render(request, template_name='propriedades.html', context={'propriedades': propriedades})
 
 
@@ -29,3 +32,8 @@ def despesas(request):
     despesas = Despesa.objects.all().filter(propriedade=id_propriedade)
     # Pagamentos da despesa: despesa.pagamento_set.all()
     return render(request, template_name='despesas.html', context={'despesas': despesas, 'hoje': datetime.today()})
+
+
+def criar_despesa(request):
+    if request.method == 'GET':
+        return render(request, template_name='criar_despesa.html', context={})
