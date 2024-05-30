@@ -12,9 +12,6 @@ def pessoas(request):
 
 def propriedades(request):
     propriedades = Propriedade.objects.all()
-
-    messages.add_message(request, messages.INFO, "Hello world.")
-
     return render(request, template_name='propriedades.html', context={'propriedades': propriedades})
 
 

@@ -7,8 +7,6 @@
     align-items: center;
     gap: 24px;
     padding: 24px;
-
-    border: solid 5px blue;
 }
 
 .despesas-totais {
@@ -16,30 +14,36 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    gap: 24px;
+    justify-content: space-between;
 }
 
 .card-total {
-    min-width: 300px;
-    width: 320px;
+    min-width: 24%;
+    width: 24%;
     height: 20vh;
+    min-height: 20vh;
     border-radius: 8px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    color: white;
+    background-color: white;
 }
 
 .card-total h2 {
-    color: white;
     margin: 0;
     padding: 8px 14px;
 }
 
 .card-total h1 {
-    color: white;
     margin: 0;
     padding: 8px 14px;
     font-size: 40px;
+}
+
+#card-divida h1, #card-divida h2 {
+    color: #ed4242;
+}
+
+#card-divida h2 {
+    font-weight: 700;
 }
 
 .despesas-filtros {
@@ -49,23 +53,18 @@
     align-items: center;
     justify-items: center;
     gap: 12px;
-    border: solid 5px red;
 }
 
 .despesas-filtros .filtro-select {
     width: 15%;    
 }
 
-.despesas-lista {
+#despesas-lista {
     width: 100%;
     padding: 0;
-
-    border: solid 5px red;
-}
-
-.despesas-lista table {
-    background-color: white;
     margin: 0;
+    background-color: #0c2b68;
+    color: white;
 }
 
 .table td, .table th {

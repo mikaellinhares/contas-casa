@@ -113,17 +113,17 @@
         </div>
     </nav>
 
+    <main>
     <!-- Mensagens -->
     <div id="display-mensagens">
         {% if messages %}
         {% for message in messages %}
-        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
         {% endfor %}
         {% endif %}
     </div>
     <!---->
 
-    <main>
     {% block 'body' %}
     {% endblock %}
     </main>
