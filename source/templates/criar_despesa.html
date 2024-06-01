@@ -2,18 +2,11 @@
 {% load static %}
 
 {% block 'head' %}
-<!-- <link rel="stylesheet" href="{% static 'css/criar_despesa.css' %}"> -->
-<style>
-    #form-criar-despesa {
-        width: 100%;
-        height: 100%;
-        padding: 12px;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/criar_despesa.css' %}">
 {% endblock %}
 
 {% block 'script' %}
-<!-- <script type="text/javascript" src={% static 'js/criar_despesa.js' %}></script> -->
+<script type="text/javascript" src={% static 'js/criar_despesa.js' %}></script>
 <script>selecionarItemSidebar('side-item-despesas')</script>
 {% endblock %}
 
@@ -22,38 +15,38 @@ Criar Despesa
 {% endblock%}
 
 {% block 'body' %}
-<form id="form-criar-despesa">
-    <h1>Nova Despesa</h1>
+<h2>Nova Despesa</h2>
 
-    <input id="input-nome" name="nome" class="form-control" type="text" placeholder="Nome da despesa">
+<form id="form-criar-despesa">
     
-    <select id="select-categoria" name="categoria" class="custom-select">
+    <label for="input-nome">Nome</label>
+    <input id="input-nome" name="nome" class="input-formulario form-control" type="text" placeholder="Nome da despesa">
+
+    <label for="select-categoria">Categoria</label>
+    <select id="select-categoria" name="categoria" class="input-formulario custom-select">
         <option selected>Open this select menu</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
     </select>
 
-    <div class="input-group flex-nowrap">
+    <label for="group-valor">Valor</label>
+    <div id="group-valor" class="input-formulario input-group flex-nowrap">
         <div class="input-group-prepend"><span class="input-group-text">R$</span></div>
         <input id="input-valor" name="valor" type="number" class="form-control" placeholder="Valor R$">
     </div>
 
-    <input id="input-vencimento" name="vencimento" class="form-control" type="date" placeholder="Vencimento">
-    
-    <label for="input-pagamento">Executar pagamento</label>
-    <div id="input-pagamento" class="input-group mb-3">
-        <div class="input-group-prepend">
-          <div class="input-group-text">
-            <input type="checkbox" aria-label="Checkbox for following text input">
-          </div>
+    <label for="input-vencimento">Vencimento</label>
+    <input id="input-vencimento" name="vencimento" class="input-formulario form-control" type="date" placeholder="Vencimento">
+
+    <label for="group-pagamento">Pagamento</label>
+    <div id="group-pagamento" class="input-formulario input-group flex-nowrap">
+        <div onclick="alteraOpcaoPagamento()" style="cursor: pointer" class="input-group-prepend">
+            <span id="bg-icone-pagamento" class="input-group-text bg-success">
+                <span id="icone-pagamento" class="material-icons bi pe-none me-2">check_box</span>
+            </span>
         </div>
-        <select id="select-usuario" name="usuario" class="custom-select">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-      </div>
+        <input id="descricao-pagamento" class="form-control" value="Pagamento automático" disabled>
+    </div>
 </form>
 {% endblock %}
