@@ -46,7 +46,26 @@ Criar Despesa
                 <span id="icone-pagamento" class="material-icons bi pe-none me-2">check_box</span>
             </span>
         </div>
-        <input id="descricao-pagamento" class="form-control" value="Pagamento automático" disabled>
+        <input id="descricao-pagamento" class="form-control" value="Com pagamento" disabled>
+        <input id="input-pagamento" name="pagamento" type="hidden" value="true">
     </div>
+
+    <label id="label-pessoa" for="select-pessoa">Pagador</label>
+    <select id="select-pessoa" name="pessoa" class="input-formulario custom-select">
+        <option selected>Open this select menu</option>
+        <option value="1">Mikael</option>
+        <option value="2">Ana</option>
+        <option value="3">Francisco</option>
+    </select>
+
+    <label id="label-forma-pagamento" for="select-forma-pagamento">Forma de pagamento</label>
+    <select id="select-forma-pagamento" name="forma_pagamento" class="input-formulario custom-select">
+        <option selected>Open this select menu</option>
+        <option value="1">Cartão Crrédito</option>
+        <option value="2">Ana</option>
+        <option value="3">Francisco</option>
+    </select>
+
+    <button id="botao-salvar" class="btn btn-success" typ="submit">Salvar</button>
 </form>
 {% endblock %}

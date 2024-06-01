@@ -70,9 +70,19 @@ class Despesa(models.Model):
 
 
 class Pagamento(models.Model):
+    # Payment Methods
+    PAYMENT_METHODS = {
+        "CC": "Cartão de Crédito",
+        "CD": "Cartão de Débito",
+        "PX": "PIX",
+        "CA": "Cartão Alimentação",
+        "DI": "Dinheiro"
+    }
+
     despesa = models.ForeignKey(Despesa, on_delete=models.CASCADE)
     pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     valor = models.DecimalField(max_digits=15, decimal_places=2)
+    forma_pagamento = models.CharField(max_length=2, choices=PAYMENT_METHODS)
     descricao = models.TextField(max_length=255, null=True, blank=True)
     data = models.DateTimeField()
 
