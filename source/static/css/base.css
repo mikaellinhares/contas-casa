@@ -27,6 +27,23 @@
 
 
 /**/
+
+*::-webkit-scrollbar {
+    width: 9px;               /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+    background: #e3e9f7;        /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #0c2b68;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #e3e9f7;  /* creates padding around scroll thumb */
+    border-left: none;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -198,6 +215,7 @@ main {
 
 #sidebar.open-sidebar {
     min-width: 15%;
+    position: fixed !important;
 }
 
 #sidebar.open-sidebar .item-description {

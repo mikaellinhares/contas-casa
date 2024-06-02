@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Pessoa, Propriedade, Despesa
+from .models import Pessoa, Propriedade, Despesa, Categoria, Pagamento
 from datetime import datetime
 
 
@@ -36,4 +36,16 @@ def despesas(request):
 
 def criar_despesa(request):
     if request.method == 'GET':
-        return render(request, template_name='criar_despesa.html', context={})
+        hoje = datetime.today().strftime('%Y-%m-%d')
+        categorias = Categoria.objects.all()
+        pessoas = Propriedade.objects.get(id=request.session['id_propriedade']).pessoas.all()
+        formas_pagamento = Pagamento.PAYMENT_METHODS
+
+        context = {
+            'hoje': hoje,
+            'categorias': categorias,
+            'pessoas': pessoas,
+            'formas_pagamento': formas_pagamento 
+        }
+
+        return render(request, template_name='criar_despesa.html', context=context)

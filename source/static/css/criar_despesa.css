@@ -1,5 +1,6 @@
 main {
     padding: 12px;
+    overflow: auto;
 }
 
 h2 {
@@ -31,6 +32,15 @@ label {
 
 .input-formulario {
     margin-bottom: 12px;
+}
+
+#select-categoria option{
+    color: white;
+}
+
+
+#group-valor div span {
+    background-color: white;
 }
 
 #icone-pagamento {
