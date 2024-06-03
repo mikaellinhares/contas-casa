@@ -49,3 +49,13 @@ def criar_despesa(request):
         }
 
         return render(request, template_name='criar_despesa.html', context=context)
+    
+    elif request.method == 'POST':
+        despesa = Despesa(
+            nome=request.POST.get('nome'),
+            categoria=Categoria.objects.get(id=request.POST.get('categoria')),
+            valor=request.POST.get('valor'),
+            data_vencimento=datetime.strptime(request.POST.get('vencimento', ''), '%Y-%m-%d')
+        )
+
+        return 'Teste'

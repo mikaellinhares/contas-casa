@@ -45,3 +45,7 @@ function selecionaCategoria() {
     selectCategorie.style.color = 'white';
     selectCategorie.style.backgroundColor = optionSelected.style.backgroundColor;   
 }
+
+function enviarFormulario() {
+    
+}
