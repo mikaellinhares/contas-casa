@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from .models import Pessoa, Propriedade, Despesa, Categoria, Pagamento
 from datetime import datetime
+
+from django.http import HttpResponsePermanentRedirect
+from django.urls import reverse
 
 
 # Create your views here.
@@ -48,6 +51,8 @@ def criar_despesa(request):
             'formas_pagamento': formas_pagamento 
         }
 
+        messages.error(request, 'teste4')
+
         return render(request, template_name='criar_despesa.html', context=context)
     
     elif request.method == 'POST':
@@ -58,4 +63,9 @@ def criar_despesa(request):
             data_vencimento=datetime.strptime(request.POST.get('vencimento', ''), '%Y-%m-%d')
         )
 
-        return 'Teste'
+        # messages.info(request, 'teste1')
+        # messages.success(request, 'teste2')
+        # messages.warning(request, 'teste3')  
+        # messages.error(request, 'teste4') 
+
+        return render(request, template_name='criar_despesa.html')

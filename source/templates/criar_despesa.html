@@ -9,7 +9,6 @@
 <script type="text/javascript" src={% static 'js/criar_despesa.js' %}></script>
 <script>
     selecionarItemSidebar('side-item-despesas');
-    // atualizarCoresCategorias();
 </script>
 {% endblock %}
 
@@ -20,14 +19,16 @@ Criar Despesa
 {% block 'body' %}
 <h2>Nova Despesa</h2>
 
-<form id="form-criar-despesa" method="POST" onsubmit="console.log('teste')">   
+<form id="form-criar-despesa" method="POST">   
     {% csrf_token %}
     
+    <!-- is-valid is-invalid -->
+
     <label for="input-nome">Nome</label>
-    <input required id="input-nome" name="nome" class="input-formulario form-control" type="text" placeholder="Nome da despesa">
+    <input id="input-nome" name="nome" class="input-formulario form-control" type="text" placeholder="Nome da despesa">
 
     <label for="select-categoria">Categoria</label>
-    <select required id="select-categoria" name="categoria" class="input-formulario custom-select" onchange="selecionaCategoria()">
+    <select id="select-categoria" name="categoria" class="input-formulario custom-select" onchange="selecionaCategoria()">
         <option value="" disabled selected>Categoria da despesa</option>
         {% for categoria in categorias %}
         <option value="{{ categoria.id }}" style="background-color: {{ categoria.cor }};">{{ categoria.nome }}</option>
@@ -37,11 +38,11 @@ Criar Despesa
     <label for="group-valor">Valor</label>
     <div id="group-valor" class="input-formulario input-group flex-nowrap">
         <div class="input-group-prepend"><span class="input-group-text">R$</span></div>
-        <input required id="input-valor" name="valor" type="number" min="0.01" step="0.01" class="form-control" placeholder="Valor">
+        <input id="input-valor" name="valor" type="number" min="0.01" step="0.01" class="form-control" placeholder="Valor">
     </div>
 
     <label for="input-vencimento">Vencimento</label>
-    <input required id="input-vencimento" name="vencimento" class="input-formulario form-control" 
+    <input id="input-vencimento" name="vencimento" class="input-formulario form-control" 
         type="date" placeholder="Vencimento" value="{{ hoje }}">
 
     <label for="group-pagamento">Pagamento</label>

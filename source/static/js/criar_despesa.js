@@ -46,6 +46,44 @@ function selecionaCategoria() {
     selectCategorie.style.backgroundColor = optionSelected.style.backgroundColor;   
 }
 
-function enviarFormulario() {
+
+function validarCampo(element) {
     
 }
+
+
+function enviarFormulario() {
+    var validated = true;
+
+    var element;
+
+    var elementsIds = ['input-nome', 'select-categoria', 'input-valor', 'input-vencimento'];
+    if (document.querySelector('#input-pagamento').value = 'true') {
+        elementsIds.push('select-pessoa');
+        elementsIds.push('select-forma-pagamento');
+    }
+
+    elementsIds.forEach((elementId) => {
+        element = document.querySelector(`#${elementId}`);
+        if (!element.value) {
+            element.classList.remove('is-valid');                
+            element.classList.add('is-invalid');
+            validated = false;
+        } else {               
+            element.classList.remove('is-invalid');
+            element.classList.add('is-valid');
+        }
+    });
+
+    return validated;
+}
+
+// Envio Formulário
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('#form-criar-despesa');
+    form.addEventListener('submit', function(event) {
+        if (!enviarFormulario()) {
+            event.preventDefault();
+        }
+    });
+});
