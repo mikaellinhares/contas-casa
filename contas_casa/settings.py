@@ -24,7 +24,7 @@ MESSAGE_TAGS = {
 SECRET_KEY = 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False  # True
 
 ALLOWED_HOSTS = ['.vercel.app']
 
