@@ -1,6 +1,7 @@
 import os.path
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from dotenv import dotenv_values
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -75,6 +76,8 @@ WSGI_APPLICATION = 'contas_casa.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+config = dotenv_values(".env")
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -82,6 +85,15 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'mikael123',
         'HOST': 'localhost'
+    } 
+} if DEBUG else {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT') 
     }
 }
 

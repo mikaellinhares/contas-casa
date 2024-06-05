@@ -51,21 +51,37 @@ def criar_despesa(request):
             'formas_pagamento': formas_pagamento 
         }
 
-        messages.error(request, 'teste4')
-
         return render(request, template_name='criar_despesa.html', context=context)
     
     elif request.method == 'POST':
         despesa = Despesa(
+            propriedade=Propriedade.objects.get(id=request.session.get('id_propriedade')),
             nome=request.POST.get('nome'),
             categoria=Categoria.objects.get(id=request.POST.get('categoria')),
             valor=request.POST.get('valor'),
             data_vencimento=datetime.strptime(request.POST.get('vencimento', ''), '%Y-%m-%d')
         )
 
-        # messages.info(request, 'teste1')
-        # messages.success(request, 'teste2')
-        # messages.warning(request, 'teste3')  
-        # messages.error(request, 'teste4') 
+        try:
+            despesa.save()
+            messages.success(request, 'Despesa criada com sucesso!')
+        except Exception as error:
+            messages.error(request, f'Ocorreu um erro ao criar a despesa:\n{error}')
+
+        if request.POST.get('pagamento'):
+            pagamento = Pagamento(
+                despesa=despesa,
+                pessoa=Pessoa.objects.get(id=request.POST.get('pessoa')),
+                valor=request.POST.get('valor'),
+                forma_pagamento=request.POST.get('forma_pagamento'),
+                descricao='Pagamento Automático',
+                data=datetime.now()
+            )
+
+            try:
+                pagamento.save()
+                messages.success(request, 'Pagamento realizado com sucesso!')
+            except Exception as error:
+                messages.error(request, f'Ocorreu um erro ao tentar realizar o pagamento da despesa:\n{error}')
 
         return render(request, template_name='criar_despesa.html')
