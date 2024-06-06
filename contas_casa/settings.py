@@ -24,7 +24,7 @@ MESSAGE_TAGS = {
 SECRET_KEY = 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # True
+DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app']
 
@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'contas_casa.wsgi.application'
 
 config = dotenv_values(".env")
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -87,6 +88,17 @@ DATABASES = {
         'HOST': 'localhost'
     } 
 } if DEBUG else {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT') 
+    }
+}
+"""
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('NAME'),
