@@ -8,6 +8,10 @@ from django.urls import reverse
 
 
 # Create your views here.
+def pagina_principal(request):
+    return render(request, template_name='pagina_principal.html')
+
+
 def pessoas(request):
     pessoas = Pessoa.objects.all()
     return render(request, template_name='pessoas.html', context={'pessoas': pessoas})
