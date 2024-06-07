@@ -82,7 +82,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'contas_casa.wsgi.application'
+if DEBUG:
+    WSGI_APPLICATION = 'contas_casa.wsgi.application'
+else:
+    WSGI_APPLICATION = 'contas_casa.wsgi.app'
 
 
 # Database
