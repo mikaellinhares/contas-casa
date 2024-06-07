@@ -14,4 +14,4 @@ urlpatterns = [
     path('despesas/criar', views.criar_despesa, name='criar_despesa'),
     # path('pagamentos/', views.pagamentos, name='pagamentos'),
     # path('rendas/', views.rendas, name='rendas')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

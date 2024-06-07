@@ -1,6 +1,8 @@
+import os
 import os.path
 from pathlib import Path
 from django.contrib.messages import constants as messages
+import dj_database_url
 from dotenv import dotenv_values
 
 
@@ -21,16 +23,21 @@ MESSAGE_TAGS = {
 }
 
 
-# Quick-start development settings - unsuitable for production
+'''# Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = []'''
 
-ALLOWED_HOSTS = []
+
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r')
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1').split(",")
+SUPABASE_DB_URL = os.environ.get("SUPABASE_DB_URL")
+DJANGO_ENV = os.environ.get('DJANGO_ENV')
+
 
 
 # Application definition
@@ -48,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,7 +88,7 @@ WSGI_APPLICATION = 'contas_casa.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'db-contas-casa',
@@ -97,7 +105,25 @@ DATABASES = {
         'HOST': config('HOST'),
         'PORT': config('PORT') 
     }
-}
+}'''
+
+
+if SUPABASE_DB_URL:
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=SUPABASE_DB_URL, conn_max_age=600
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'db-contas-casa',
+            'USER': 'postgres',
+            'PASSWORD': 'mikael123',
+            'HOST': 'localhost'
+        }
+    }
 
 
 # Password validation
@@ -135,9 +161,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'source/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'source/static'),]
-MEDIA_ROOT = 'source/midias/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/midias/'
+MEDIA_ROOT = 'source/midias/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
