@@ -8,6 +8,10 @@ from dotenv import dotenv_values
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Enviroment Variables
+config = dotenv_values(".env")
+
+
 # Message Tags
 MESSAGE_TAGS = {
     messages.INFO: "alert-primary",
@@ -26,7 +30,7 @@ SECRET_KEY = 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -38,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',    
-    'source', # Poderia ser assim: 'source.apps.SourceConfig'
+    'source',
     'django_cleanup.apps.CleanupConfig'
 ]
 
@@ -76,9 +80,6 @@ WSGI_APPLICATION = 'contas_casa.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-config = dotenv_values(".env")
-
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -88,17 +89,6 @@ DATABASES = {
         'HOST': 'localhost'
     } 
 } if DEBUG else {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
-        'PORT': config('PORT') 
-    }
-}
-"""
-DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': config('NAME'),

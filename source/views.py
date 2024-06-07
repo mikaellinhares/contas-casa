@@ -58,31 +58,29 @@ def criar_despesa(request):
         return render(request, template_name='criar_despesa.html', context=context)
     
     elif request.method == 'POST':
-        despesa = Despesa(
-            propriedade=Propriedade.objects.get(id=request.session.get('id_propriedade')),
-            nome=request.POST.get('nome'),
-            categoria=Categoria.objects.get(id=request.POST.get('categoria')),
-            valor=request.POST.get('valor'),
-            data_vencimento=datetime.strptime(request.POST.get('vencimento', ''), '%Y-%m-%d')
-        )
-
         try:
+            despesa = Despesa(
+                propriedade=Propriedade.objects.get(id=request.session.get('id_propriedade')),
+                nome=request.POST.get('nome'),
+                categoria=Categoria.objects.get(id=request.POST.get('categoria')),
+                valor=request.POST.get('valor'),
+                data_vencimento=datetime.strptime(request.POST.get('vencimento', ''), '%Y-%m-%d')
+            )
             despesa.save()
             messages.success(request, 'Despesa criada com sucesso!')
         except Exception as error:
             messages.error(request, f'Ocorreu um erro ao criar a despesa:\n{error}')
 
-        if request.POST.get('pagamento'):
-            pagamento = Pagamento(
-                despesa=despesa,
-                pessoa=Pessoa.objects.get(id=request.POST.get('pessoa')),
-                valor=request.POST.get('valor'),
-                forma_pagamento=request.POST.get('forma_pagamento'),
-                descricao='Pagamento Automático',
-                data=datetime.now()
-            )
-
+        if request.POST.get('pagamento', 'false') == 'true':
             try:
+                pagamento = Pagamento(
+                    despesa=despesa,
+                    pessoa=Pessoa.objects.get(id=request.POST.get('pessoa')),
+                    valor=request.POST.get('valor'),
+                    forma_pagamento=request.POST.get('forma_pagamento'),
+                    descricao='Pagamento Automático',
+                    data=datetime.now()
+                )
                 pagamento.save()
                 messages.success(request, 'Pagamento realizado com sucesso!')
             except Exception as error:

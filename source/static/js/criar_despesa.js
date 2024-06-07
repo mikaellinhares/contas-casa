@@ -35,7 +35,6 @@ function alteraOpcaoPagamento() {
     ['pessoa', 'forma-pagamento'].forEach(key => {
         document.querySelector(`#label-${key}`).style.display = elementsDisplay;
         document.querySelector(`#select-${key}`).style.display = elementsDisplay;
-
     });
 }
 
@@ -48,10 +47,10 @@ function selecionaCategoria() {
 
 
 function validarCampo(element) {
-    let validated = false;
+    let isValid = false;
 
     if (element.value) {
-        validated = true;
+        isValid = true;
 
         if (element.id == 'input-vencimento') {
             const inputDate   = new Date(element.value);
@@ -62,12 +61,12 @@ function validarCampo(element) {
             currentDate.setHours(0, 0, 0, 0);
             
             if (inputDate < currentDate) {
-                validated = false;
+                isValid = false;
             }
         }
     }
 
-    if (validated) {
+    if (isValid) {
         element.classList.remove('is-invalid');
         element.classList.add('is-valid');
     } else {
@@ -75,24 +74,23 @@ function validarCampo(element) {
         element.classList.add('is-invalid');
     }    
 
-    return validated
+    return isValid
 }
 
 
-function enviarFormulario() {
-    let validated = true;
-
-    let element;
-
+function validarFormulario() {
     let elementsIds = ['input-nome', 'select-categoria', 'input-valor', 'input-vencimento'];
-    if (document.querySelector('#input-pagamento').value = 'true') {
+    if (document.querySelector('#input-pagamento').value == 'true') {
         elementsIds.push('select-pessoa');
         elementsIds.push('select-forma-pagamento');
     }
 
+    let element;
+    let validated = true;
+    
     elementsIds.forEach((elementId) => {
         element = document.querySelector(`#${elementId}`);
-        if (!validarCampo(element)) {
+        if (validarCampo(element) === false) {
             validated = false;
         }
     });
@@ -105,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adiciona validação do formulário ao enviar
     const form = document.querySelector('#form-criar-despesa');
     form.addEventListener('submit', function(event) {
-        if (!enviarFormulario()) {
+        if (validarFormulario() === false) {
             event.preventDefault();
         }
     });
