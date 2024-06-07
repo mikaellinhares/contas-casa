@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []'''
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1').split(",")
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(",")
 SUPABASE_DB_URL = os.environ.get("SUPABASE_DB_URL")
 DJANGO_ENV = os.environ.get('DJANGO_ENV')
 
