@@ -1,17 +1,16 @@
 import os
-import os.path
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import dj_database_url
-from dotenv import dotenv_values
+from dotenv import load_dotenv
+
+
+# ENV
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Enviroment Variables
-config = dotenv_values(".env")
 
 
 # Message Tags
@@ -23,21 +22,10 @@ MESSAGE_TAGS = {
 }
 
 
-'''# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-# SECURITY WARNING: keep the secret key used in production secret!
+ALLOWED_HOSTS = []
 SECRET_KEY = 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r'
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []'''
-
-
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(",")
-SUPABASE_DB_URL = os.environ.get("SUPABASE_DB_URL")
-DJANGO_ENV = os.environ.get('DJANGO_ENV')
-
+SUPABASE_DB_URL = os.environ.get('SUPABASE_DB_URL')
 
 
 # Application definition
@@ -82,38 +70,17 @@ TEMPLATES = [
     },
 ]
 
-if DEBUG:
-    WSGI_APPLICATION = 'contas_casa.wsgi.application'
-else:
-    WSGI_APPLICATION = 'contas_casa.wsgi.app'
+
+WSGI_APPLICATION = 'contas_casa.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-'''DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db-contas-casa',
-        'USER': 'postgres',
-        'PASSWORD': 'mikael123',
-        'HOST': 'localhost'
-    } 
-} if DEBUG else {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('NAME'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
-        'HOST': config('HOST'),
-        'PORT': config('PORT') 
-    }
-}'''
-
 
 if SUPABASE_DB_URL:
     DATABASES = {
-        "default": dj_database_url.config(
+        'default': dj_database_url.config(
             default=SUPABASE_DB_URL, conn_max_age=600
         )
     }
@@ -127,6 +94,7 @@ else:
             'HOST': 'localhost'
         }
     }
+
 
 
 # Password validation
