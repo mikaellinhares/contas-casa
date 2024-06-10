@@ -63,11 +63,28 @@
     border: solid 5px red;
 }
 
-.despesas-lista table {
+.card-despesa {
     background-color: white;
-    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-start;  
+    padding: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-bottom: 12px;
+    border-radius: 14px;
 }
 
-.table td, .table th {
-    vertical-align: baseline;
+.card-despesa * {
+    margin: 0;
+    width: 20%;
+    
+    border: solid 2px green;
+}
+
+.display-categoria {
+    border-radius: 14px;
+    padding: 10px 12px;
+    color: white;
 }

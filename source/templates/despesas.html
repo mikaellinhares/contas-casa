@@ -49,39 +49,15 @@ Despesas
         </select>
     </div>
     <div class="despesas-lista">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Criação</th>
-                <th scope="col">Vencimento</th>
-                <th scope="col">Pagamento</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% if despesas %}
-            {% for despesa in despesas %}  
-              <tr class="{% if despesa.data_pagamento %}
-                            bg-success
-                         {% elif despesa.data_vencimento > hoje %}
-                            bg-danger
-                         {% else %}
-                            bg-warning
-                         {% endif %}">
-                <td>{{ despesa.nome }}</td>
-                <td>{{ despesa.categoria }}</td>
-                <td>{{ despesa.valor }}</td>
-                <td>{{ despesa.data_criacao }}</td>
-                <td>{{ despesa.data_vencimento }}</td>
-                <td>{{ despesa.data_pagamento }}</td>
-                <td><button class="btn btn-success">Pagamentos</button></td>
-              </tr>
-            {% endfor %}
-            {% endif %}
-            </tbody>
-          </table>
+        {% for despesa in despesas %}
+        <div class="card-despesa">
+            <p>{{ despesa.nome }}</p>
+            <span class="display-categoria" style="background-color: {{ despesa.categoria.cor }}">{{ despesa.categoria }}</span>
+            <span>R$ {{ despesa.valor }}</span>
+            <span>{{ despesa.data_criacao }}</span>
+            <span style="background-color: {% if despesa.pagamento %}green{% endif%}">Pago</span>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
