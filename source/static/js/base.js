@@ -40,3 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
 function selecionarItemSidebar(sideItemId) {
   document.getElementById(sideItemId).classList.add('active');
 }
+
+function selecionaCategoria(selectId) {
+  var selectCategory = document.querySelector(`#${selectId}`);   
+  var optionSelected = selectCategory.selectedOptions[0];
+  var textColor
+  if (optionSelected.value == '') { textColor = 'black'; } else { textColor = 'white'; }
+  selectCategory.style.color = textColor;
+  selectCategory.style.backgroundColor = optionSelected.style.backgroundColor;   
+}

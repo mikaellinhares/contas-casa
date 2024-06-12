@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 
 # ENV
-load_dotenv()
+# load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,8 @@ MESSAGE_TAGS = {
 ALLOWED_HOSTS = []
 SECRET_KEY = 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r'
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-SUPABASE_DB_URL = os.environ.get('SUPABASE_DB_URL')
+# SUPABASE_DB_URL = os.environ.get('SUPABASE_DB_URL')
+SUPABASE_DB_URL = None
 
 
 # Application definition

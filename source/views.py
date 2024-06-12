@@ -36,9 +36,12 @@ def despesas(request):
     if not id_propriedade:
         return redirect('propriedades')
 
+    categorias = Categoria.objects.all()
     despesas = Despesa.objects.all().filter(propriedade=id_propriedade)
-    # Pagamentos da despesa: despesa.pagamento_set.all()
-    return render(request, template_name='despesas.html', context={'despesas': despesas, 'hoje': datetime.today()})
+    
+    context = {'categorias': categorias, 'despesas': despesas, 'hoje': datetime.today().date}
+
+    return render(request, template_name='despesas.html', context=context)
 
 
 def criar_despesa(request):

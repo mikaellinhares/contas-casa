@@ -7,8 +7,20 @@
     align-items: center;
     gap: 24px;
     padding: 24px;
+    padding-bottom: 0;
+}
 
-    border: solid 5px blue;
+#adicionar-despesa {
+    padding: 20px;
+    border-radius: 30px;
+    color: white;
+    background-color: #0c2b68;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    position: fixed; /* Fixa o elemento na viewport */
+    bottom: 12px;      /* Posiciona o elemento no fundo da viewport */
+    right: 12px;       /* Posiciona o elemento no lado direito da viewport */
+    z-index: 9999;  
 }
 
 .despesas-totais {
@@ -21,24 +33,23 @@
 }
 
 .card-total {
-    min-width: 300px;
-    width: 320px;
-    height: 20vh;
-    border-radius: 8px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 370px;
+    border-radius: 14px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     color: white;
 }
 
 .card-total h2 {
     color: white;
     margin: 0;
-    padding: 8px 14px;
+    padding: 10px 16px;
 }
 
 .card-total h1 {
     color: white;
     margin: 0;
-    padding: 8px 14px;
+    padding: 10px 14px;
+    padding-top: 0;
     font-size: 40px;
 }
 
@@ -49,18 +60,26 @@
     align-items: center;
     justify-items: center;
     gap: 12px;
-    border: solid 5px red;
 }
 
 .despesas-filtros .filtro-select {
     width: 15%;    
 }
 
+#filtro-categoria option {
+    color: white;
+}
+
 .despesas-lista {
     width: 100%;
     padding: 0;
+    overflow: auto;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
 
-    border: solid 5px red;
+.despesas-lista::-webkit-scrollbar { 
+	display: none;
 }
 
 .card-despesa {
@@ -78,13 +97,22 @@
 
 .card-despesa * {
     margin: 0;
-    width: 20%;
-    
-    border: solid 2px green;
+    width: 19%;
+}
+
+.despesa-texto {
+    font-size: 1.25rem;
+    font-weight: 500;
 }
 
 .display-categoria {
     border-radius: 14px;
     padding: 10px 12px;
     color: white;
+    font-size: 1.10rem;
+}
+
+.display-situacao {
+    border-radius: 14px;
+    padding: 6px 8px;    
 }

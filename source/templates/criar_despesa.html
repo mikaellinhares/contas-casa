@@ -26,8 +26,9 @@ Criar Despesa
     <input id="input-nome" name="nome" class="input-formulario form-control" type="text" placeholder="Nome da despesa">
 
     <label for="select-categoria">Categoria</label>
-    <select id="select-categoria" name="categoria" class="input-formulario custom-select" onchange="selecionaCategoria()">
-        <option value="" disabled selected>Categoria da despesa</option>
+    <select id="select-categoria" name="categoria" class="input-formulario custom-select" 
+        onchange="selecionaCategoria(this.id)">
+        <option value="" style="background-color: white; color: black;" disabled selected>Categoria da despesa</option>
         {% for categoria in categorias %}
         <option value="{{ categoria.id }}" style="background-color: {{ categoria.cor }};">{{ categoria.nome }}</option>
         {% endfor %}

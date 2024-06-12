@@ -38,14 +38,6 @@ function alteraOpcaoPagamento() {
     });
 }
 
-function selecionaCategoria() {
-    var selectCategorie = document.querySelector('#select-categoria');   
-    var optionSelected = selectCategorie.selectedOptions[0];
-    selectCategorie.style.color = 'white';
-    selectCategorie.style.backgroundColor = optionSelected.style.backgroundColor;   
-}
-
-
 function validarCampo(element) {
     let isValid = false;
 

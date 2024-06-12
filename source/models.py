@@ -57,7 +57,8 @@ class Categoria(models.Model):
 
 class Despesa(models.Model):
     nome = models.CharField(max_length=100)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    # criador = models.ForeignKey(Pessoa, on_delete=models.CASCADE, null=True, blank=True) 
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE) 
     propriedade = models.ForeignKey(Propriedade, on_delete=models.CASCADE, null=True, blank=True)
     meta = models.ForeignKey(Meta, on_delete=models.CASCADE, null=True, blank=True)
     valor = models.DecimalField(max_digits=15, decimal_places=2)

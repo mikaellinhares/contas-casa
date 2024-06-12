@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block 'script' %}
-<!-- <script type="text/javascript" src={% static 'js/despesas.js' %}></script> -->
+<script type="text/javascript" src={% static 'js/despesas.js' %}></script>
 <script>selecionarItemSidebar('side-item-despesas')</script>
 {% endblock %}
 
@@ -35,29 +35,44 @@ Despesas
         </div>
     </div>
     <div class="despesas-filtros">
-        <select class="filtro-select custom-select">
-            <option selected>Categoria</option>
-            <option value="1">Mercado</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-        <select class="filtro-select custom-select">
-            <option selected>Tipo de Data</option>
-            <option value="criacao">Criação</option>
-            <option value="pagamento">Pagamento</option>
-            <option value="vencimento">Vencimento</option>
+        <select id="filtro-categoria" name="categoria" class="filtro-select custom-select"
+            onchange="selecionaCategoria(this.id)">
+            <option value="" style="background-color: white; color: black;" selected>Todas Categorias</option>
+            {% for categoria in categorias %}
+            <option 
+                value="{{ categoria.id }}" 
+                style="background-color: {{ categoria.cor }};">
+                {{ categoria.nome }}
+            </option>
+            {% endfor %}
         </select>
     </div>
     <div class="despesas-lista">
         {% for despesa in despesas %}
         <div class="card-despesa">
-            <p>{{ despesa.nome }}</p>
-            <span class="display-categoria" style="background-color: {{ despesa.categoria.cor }}">{{ despesa.categoria }}</span>
-            <span>R$ {{ despesa.valor }}</span>
-            <span>{{ despesa.data_criacao }}</span>
-            <span style="background-color: {% if despesa.pagamento %}green{% endif%}">Pago</span>
+            <p class="despesa-texto">{{ despesa.nome }}</p>
+            <span class="display-categoria text-center" style="background-color: {{ despesa.categoria.cor }}">
+                {{ despesa.categoria }}
+            </span>
+            <span class="despesa-texto text-center">R$ {{ despesa.valor }}</span>
+            <span class="despesa-texto text-center">{{ despesa.data_criacao }}</span>
+            <div class="text-center">
+                {% if despesa.pagamento_set.all %}
+                <span class="display-situacao alert-success">Pago</span>
+                {% elif hoje == despesa.data_vencimento %}
+                <span class="display-situacao alert-info">Vence hoje</span>
+                {% elif hoje > despesa.data_vencimento %}
+                <span class="display-situacao alert-danger">Vencido</span>
+                {% else %}
+                <span class="display-situacao alert-warning">Pendente</span>
+                {% endif %}
+            </div>
         </div>
         {% endfor %}
     </div>
+
+    <a href="{% url 'criar_despesa' %}">
+        <span id="adicionar-despesa" class="material-icons bi pe-none me-2">credit_card_off</span>
+    </a>
 </div>
 {% endblock %}
