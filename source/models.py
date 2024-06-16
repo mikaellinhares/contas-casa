@@ -55,19 +55,35 @@ class Categoria(models.Model):
         return self.nome
 
 
+class Parcelamento(models.Model):
+    nome = models.CharFieldnome = models.CharField(max_length=100)
+    propriedade = models.ForeignKey(Propriedade, on_delete=models.CASCADE)
+    descricao = models.TextField(max_length=255, null=True, blank=True)
+    data = models.DateTimeField() 
+
+    def __str__(self):
+        return self.name
+
+
 class Despesa(models.Model):
     nome = models.CharField(max_length=100)
     # criador = models.ForeignKey(Pessoa, on_delete=models.CASCADE, null=True, blank=True) 
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE) 
     propriedade = models.ForeignKey(Propriedade, on_delete=models.CASCADE, null=True, blank=True)
     meta = models.ForeignKey(Meta, on_delete=models.CASCADE, null=True, blank=True)
+    parcelamento = models.ForeignKey(Parcelamento, on_delete=models.CASCADE, null=True, blank=True)
     valor = models.DecimalField(max_digits=15, decimal_places=2)
     data_criacao = models.DateField(auto_now_add=True)
     data_vencimento = models.DateField(null=True, blank=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.nome} - R${self.valor}'
 
+    def somar_valores(despesas) -> float:
+        return sum([despesa.valor for despesa in despesas])
+
+    def somar_pagamentos(despesas) -> float:
+        return sum([pagamento.valor for despesa in despesas for pagamento in despesa.pagamento_set.all()])
 
 class Pagamento(models.Model):
     # Payment Methods
@@ -88,3 +104,4 @@ class Pagamento(models.Model):
 
     def __str__(self):
         return f'{self.pessoa} - {self.despesa} - R${self.valor}'
+    

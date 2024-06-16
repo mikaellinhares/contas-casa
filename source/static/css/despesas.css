@@ -53,6 +53,15 @@
     font-size: 40px;
 }
 
+.botao-pagamentos {
+    border-radius: 14px;
+}
+
+.icone-botao-pagamentos {
+    margin: 4px;
+    font-size: 24px;
+}
+
 .despesas-filtros {
     width: 100%;
     display: flex;
@@ -95,9 +104,9 @@
     border-radius: 14px;
 }
 
-.card-despesa * {
+.card-despesa > * {
     margin: 0;
-    width: 19%;
+    width: 16%;
 }
 
 .despesa-texto {

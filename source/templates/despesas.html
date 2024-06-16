@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block 'head' %}
 <link rel="stylesheet" href="{% static 'css/despesas.css' %}">
 {% endblock %}
@@ -18,20 +19,20 @@ Despesas
 <div class="main-container">
     <div class="despesas-totais">
         <div class="card-total card-divida bg-danger">
-            <h2>Dívidas</h2>
-            <h1>R$ 10.000,00</h1>
+            <h2>Gasto</h2>
+            <h1>R$ {{ gasto }}</h1>
         </div>
         <div class="card-total card-pago bg-success">
             <h2>Pago</h2>
-            <h1>R$ 10.000,00</h1>
+            <h1>R$ {{ pago }}</h1>
         </div>
         <div class="card-total card-pendente bg-warning">
             <h2>Pendente</h2>
-            <h1>R$ 10.000,00</h1>
+            <h1>R$ {{ pendente }}</h1>
         </div>
         <div class="card-total card-parcelado bg-info">
             <h2>Parcelado</h2>
-            <h1>R$ 10.000,00</h1>
+            <h1>R$ 0</h1>
         </div>
     </div>
     <div class="despesas-filtros">
@@ -67,6 +68,11 @@ Despesas
                 <span class="display-situacao alert-warning">Pendente</span>
                 {% endif %}
             </div>
+            <div class="text-center">
+                <button class="botao-pagamentos btn btn-success" onclick="verPagamentos({{ despesa.id }})">
+                    <span class="icone-botao-pagamentos material-icons">credit_score</span>
+                </button>
+            </div> 
         </div>
         {% endfor %}
     </div>

@@ -19,9 +19,6 @@ def pessoas(request):
 
 def propriedades(request):
     propriedades = Propriedade.objects.all()
-
-    messages.add_message(request, messages.INFO, "Hello world.")
-
     return render(request, template_name='propriedades.html', context={'propriedades': propriedades})
 
 
@@ -38,8 +35,18 @@ def despesas(request):
 
     categorias = Categoria.objects.all()
     despesas = Despesa.objects.all().filter(propriedade=id_propriedade)
+    gasto = Despesa.somar_valores(despesas)
+    pago = Despesa.somar_pagamentos(despesas)
+    pendente = gasto - pago
     
-    context = {'categorias': categorias, 'despesas': despesas, 'hoje': datetime.today().date}
+    context = {
+        'categorias': categorias, 
+        'despesas': despesas, 
+        'hoje': datetime.today().date,
+        'gasto': gasto,
+        'pago': pago,
+        'pendente': pendente
+    }
 
     return render(request, template_name='despesas.html', context=context)
 
@@ -88,5 +95,7 @@ def criar_despesa(request):
                 messages.success(request, 'Pagamento realizado com sucesso!')
             except Exception as error:
                 messages.error(request, f'Ocorreu um erro ao tentar realizar o pagamento da despesa:\n{error}')
+        else:
+            messages.error(request, f'Não foi registrado pagamento para a despesa')
 
-        return render(request, template_name='criar_despesa.html')
+        return redirect('criar_despesa')
