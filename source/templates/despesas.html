@@ -36,8 +36,8 @@ Despesas
         </div>
     </div>
     <div class="despesas-filtros">
-        <select id="filtro-categoria" name="categoria" class="filtro-select custom-select"
-            onchange="selecionaCategoria(this.id)">
+        <input id="filtro-nome" name="nome" class="filtro-input form-control" placeholder="Nome da despesa">
+        <select id="filtro-categoria" name="categoria" class="filtro-select custom-select" onchange="selecionaCategoria(this.id)">
             <option value="" style="background-color: white; color: black;" selected>Todas Categorias</option>
             {% for categoria in categorias %}
             <option 
@@ -46,6 +46,13 @@ Despesas
                 {{ categoria.nome }}
             </option>
             {% endfor %}
+        </select>
+        <select id="filtro-situacao" name="situacao" class="filtro-select custom-select" onchange="selecionaSituacao(this.value)">
+            <option value="" class="opcao-situacao" style="background-color: white; color: black;" selected>Todas Situações</option>
+            <option value="pago" class="opcao-situacao alert-success">Pago</option>
+            <option value="vence-hoje" class="opcao-situacao alert-info">Vence hoje</option>
+            <option value="vencido" class="opcao-situacao alert-danger">Vencido</option>
+            <option value="pendente" class="opcao-situacao alert-warning">Pendente</option>
         </select>
     </div>
     <div class="despesas-lista">
@@ -69,7 +76,7 @@ Despesas
                 {% endif %}
             </div>
             <div class="text-center">
-                <button class="botao-pagamentos btn btn-success" onclick="verPagamentos({{ despesa.id }})">
+                <button class="botao-pagamentos btn btn-success" onclick="mostrarPagamentos({{ despesa.id }})">
                     <span class="icone-botao-pagamentos material-icons">credit_score</span>
                 </button>
             </div> 
@@ -81,4 +88,8 @@ Despesas
         <span id="adicionar-despesa" class="material-icons bi pe-none me-2">credit_card_off</span>
     </a>
 </div>
+{% endblock %}
+
+{% block 'modal' %}
+<div id="modal-pagamentos"></div>
 {% endblock %}

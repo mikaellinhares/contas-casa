@@ -11,6 +11,6 @@ urlpatterns = [
     # path('categorias/', views.categorias, name='categorias'),
     path('despesas', views.despesas, name='despesas'),
     path('despesas/criar', views.criar_despesa, name='criar_despesa'),
-    # path('pagamentos/', views.pagamentos, name='pagamentos'),
+    path('despesas/<int:despesa_id>/pagamentos', views.despesa_pagamentos, name='despesa_pagamentos'),
     # path('rendas/', views.rendas, name='rendas')
 ]

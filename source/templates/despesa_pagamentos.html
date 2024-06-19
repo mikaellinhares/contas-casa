@@ -1,0 +1,21 @@
+<div class="display-pagamentos">
+    <h2 class="titulo-pagamentos">Pagamentos</h2>
+    <div class="list-pagamentos">
+    {% for pagamento in pagamentos %}
+        <div class="card-pagamento">
+            <div class="infos-pagamento">
+                <span>R$ {{ pagamento.valor }}</span>
+                <span>{{ pagamento.get_forma_pagamento_display }}</span>
+                <span>{{ pagamento.data }}</span> 
+                <span>{{ pagamento.pessoa }}</span>
+                <span>{{ pagamento.descricao }}</span>
+            </div>
+            <span class="cancelar-pagamento material-icons">close</span>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="acoes-pagamentos">
+        <button class="btn btn-success" onclick="">Pagar</button>
+        <button class="btn btn-danger" onclick="fecharModal()">Fechar</button>
+    </div>
+</div>

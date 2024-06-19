@@ -85,6 +85,7 @@ class Despesa(models.Model):
     def somar_pagamentos(despesas) -> float:
         return sum([pagamento.valor for despesa in despesas for pagamento in despesa.pagamento_set.all()])
 
+
 class Pagamento(models.Model):
     # Payment Methods
     PAYMENT_METHODS = {

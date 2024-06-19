@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 from django.contrib import messages
 from .models import Pessoa, Propriedade, Despesa, Categoria, Pagamento
 from datetime import datetime
@@ -99,3 +101,10 @@ def criar_despesa(request):
             messages.error(request, f'Não foi registrado pagamento para a despesa')
 
         return redirect('criar_despesa')
+
+
+def despesa_pagamentos(request, despesa_id: int):
+    despesa = get_object_or_404(Despesa, id=despesa_id)
+    pagamentos = despesa.pagamento_set.all()
+    pagamentos_html = render_to_string('despesa_pagamentos.html', context={'pagamentos': pagamentos})
+    return JsonResponse(pagamentos_html, safe=False)

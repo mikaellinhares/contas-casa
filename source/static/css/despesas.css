@@ -8,6 +8,7 @@
     gap: 24px;
     padding: 24px;
     padding-bottom: 0;
+    overflow: auto;
 }
 
 #adicionar-despesa {
@@ -20,15 +21,15 @@
     position: fixed; /* Fixa o elemento na viewport */
     bottom: 12px;      /* Posiciona o elemento no fundo da viewport */
     right: 12px;       /* Posiciona o elemento no lado direito da viewport */
-    z-index: 9999;  
+    z-index: 10;  
 }
 
 .despesas-totais {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
     gap: 24px;
 }
 
@@ -71,18 +72,28 @@
     gap: 12px;
 }
 
-.despesas-filtros .filtro-select {
-    width: 15%;    
+.filtro-select {
+    width: 15%; 
+    border-radius: 14px;
+    text-align: center;
+}
+
+.filtro-input {
+    width: 30%;
+    border-radius: 14px;
 }
 
 #filtro-categoria option {
     color: white;
 }
 
+.opcao-situacao {
+    padding: 0;
+}
+
 .despesas-lista {
     width: 100%;
     padding: 0;
-    overflow: auto;
     border-top-left-radius: 14px;
     border-top-right-radius: 14px;
 }
@@ -124,4 +135,89 @@
 .display-situacao {
     border-radius: 14px;
     padding: 6px 8px;    
+}
+
+
+
+/* ====== PAGAMENTOS ====== */
+#modal-pagamentos {
+    position: fixed;
+    z-index: 4;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    padding: 24px;
+}
+
+.display-pagamentos {
+    width: 100%;
+    border-radius: 8px;
+    background-color: #0c2b68;
+    padding: 16px;
+}
+
+.titulo-pagamentos {
+    width: 100%;
+    background-color: #0c2b68;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.list-pagamentos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0px;
+    overflow: auto;
+    height: 78%;
+}
+
+.list-pagamentos::-webkit-scrollbar-thumb {
+    border: 3px solid #e3e9f7;
+}
+
+.list-pagamentos::-webkit-scrollbar-track {
+    background: #e3e9f7;
+    border-radius: 20px;
+}
+
+.card-pagamento {
+    background-color: #1F43B6;
+    color: white;
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.infos-pagamento {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    border: solid 4px greenyellow;
+}
+
+.infos-pagamento span {
+
+}
+
+.cancelar-pagamento {
+    background-color: red;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 34px;
+}
+
+.acoes-pagamentos {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 }

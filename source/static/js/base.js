@@ -49,3 +49,9 @@ function selecionaCategoria(selectId) {
   selectCategory.style.color = textColor;
   selectCategory.style.backgroundColor = optionSelected.style.backgroundColor;   
 }
+
+function fecharModal() {
+  const modal = document.querySelector('#modal-pagamentos');
+  modal.innerHTML = '';
+  modal.style.display = 'none';
+}
