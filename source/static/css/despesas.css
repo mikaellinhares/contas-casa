@@ -200,11 +200,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    border: solid 4px greenyellow;
-}
-
-.infos-pagamento span {
-
 }
 
 .cancelar-pagamento {
