@@ -1,0 +1,30 @@
+<div class="modal-pagamento">
+    <label for="group-valor">Valor</label>
+    <div id="group-valor" class="input-formulario input-group flex-nowrap">
+        <div class="input-group-prepend"><span class="input-group-text">R$</span></div>
+        <input id="input-valor" name="valor" type="number" min="0.01" step="0.01" class="form-control" placeholder="Valor">
+    </div>
+
+    <!-- 
+    // Substituir pela data de pagamento
+    <label for="input-vencimento">Vencimento</label>
+    <input id="input-vencimento" name="vencimento" class="input-formulario form-control is-valid" 
+        type="date" placeholder="Vencimento" value="{{ hoje }}">
+    -->
+
+    <label id="label-pessoa" for="select-pessoa">Pagador</label>
+    <select id="select-pessoa" name="pessoa" class="input-formulario custom-select">
+        <option value="" disabled selected>Pagador da despesa</option>
+        {% for pessoa in pessoas %}
+        <option value="{{ pessoa.id }}">{{ pessoa.nome }}</option>
+        {% endfor %}
+    </select>
+
+    <label id="label-forma-pagamento" for="select-forma-pagamento">Forma de pagamento</label>
+    <select id="select-forma-pagamento" name="forma_pagamento" class="input-formulario custom-select">
+        <option value="" disabled selected>Método de pagamento</option>
+        {% for sigla, forma in formas_pagamento.items %}
+        <option value="{{ sigla }}">{{ forma }}</option>
+        {% endfor %}
+    </select>
+</div>

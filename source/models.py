@@ -11,6 +11,9 @@ class Pessoa(models.Model):
 
     def nascimento_padrao(self) -> str:
         return '-'.join(reversed(str(self.nascimento).split('/')))
+    
+    def saldo_formatado(self) -> str:
+        return f'{self.saldo:,.2f}'.replace(',', 'X').replace('.', ',').replace('X', '.')
 
 
 class Propriedade(models.Model):

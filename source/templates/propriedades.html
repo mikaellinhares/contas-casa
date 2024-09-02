@@ -30,7 +30,7 @@ Propriedades
         </div>
         <button 
           class="card-botao btn btn-primary"
-          OnClick="acessarPropriedade('{% url 'propriedade' id_propriedade=propriedade.id %}')">
+          OnClick="acessarPropriedade({% url 'propriedade' id_propriedade=propriedade.id %})">
           Acessar
         </button>
       </div>
