@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import dj_database_url
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 
 # ENV
@@ -22,6 +22,7 @@ MESSAGE_TAGS = {
 }
 
 
+# ALLOWED_HOSTS = ['192.168.2.121']
 ALLOWED_HOSTS = []
 SECRET_KEY = 'django-insecure-$fhihi6p3@e8d*_$-8k2q9)u=7hjx4+w%a*2(te9ib))v&w75r'
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'

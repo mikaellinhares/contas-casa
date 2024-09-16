@@ -59,28 +59,20 @@ Despesas
     <div class="despesas-lista">
         {% for despesa in despesas %}
         <div class="card-despesa">
+            {% if despesa.pagamento_set.all %}
+                <span onclick="mostrarPagamentos({{ despesa.id }})" class="display-situacao alert-success" >Pago</span>
+            {% elif hoje == despesa.data_vencimento %}
+                <span onclick="mostrarPagamentos({{ despesa.id }})" class="display-situacao alert-info">Vence hoje</span>
+            {% elif hoje > despesa.data_vencimento %}
+                <span onclick="mostrarPagamentos({{ despesa.id }})" class="display-situacao alert-danger">Vencido</span>
+            {% else %}
+                <span onclick="mostrarPagamentos({{ despesa.id }})" class="display-situacao alert-warning">Pendente</span>
+            {% endif %}
+
             <p class="despesa-texto">{{ despesa.nome }}</p>
-            <span class="display-categoria text-center" style="background-color: {{ despesa.categoria.cor }}">
-                {{ despesa.categoria }}
-            </span>
-            <span class="despesa-texto text-center">R$ {{ despesa.valor }}</span>
-            <span class="despesa-texto text-center">{{ despesa.data_criacao }}</span>
-            <div class="text-center">
-                {% if despesa.pagamento_set.all %}
-                <span class="display-situacao alert-success">Pago</span>
-                {% elif hoje == despesa.data_vencimento %}
-                <span class="display-situacao alert-info">Vence hoje</span>
-                {% elif hoje > despesa.data_vencimento %}
-                <span class="display-situacao alert-danger">Vencido</span>
-                {% else %}
-                <span class="display-situacao alert-warning">Pendente</span>
-                {% endif %}
-            </div>
-            <div class="text-center">
-                <button class="botao-pagamentos btn btn-success" onclick="mostrarPagamentos({{ despesa.id }})">
-                    <span class="icone-botao-pagamentos material-icons">credit_score</span>
-                </button>
-            </div> 
+            <span class="display-valor despesa-texto">R$ {{ despesa.valor }}</span>
+            <span class="display-categoria despesa-texto" style="background-color: {{ despesa.categoria.cor }}">{{ despesa.categoria }}</span>
+            <span class="display-data despesa-texto">{{ despesa.data_criacao }}</span>
         </div>
         {% endfor %}
     </div>

@@ -36,14 +36,14 @@ def despesas(request):
         return redirect('propriedades')
 
     categorias = Categoria.objects.all()
-    despesas = Despesa.objects.all().filter(propriedade=id_propriedade)
+    despesas = Despesa.objects.all().filter(propriedade=id_propriedade).order_by('-data_criacao', '-id')
     gasto = Despesa.somar_valores(despesas)
     pago = Despesa.somar_pagamentos(despesas)
     pendente = gasto - pago
     
     context = {
         'categorias': categorias, 
-        'despesas': despesas, 
+        'despesas': despesas,
         'hoje': datetime.today().date,
         'gasto': gasto,
         'pago': pago,
