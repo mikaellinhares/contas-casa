@@ -11,33 +11,20 @@
     overflow: auto;
 }
 
-#adicionar-despesa {
-    padding: 20px;
-    border-radius: 30px;
-    color: white;
-    background-color: #0c2b68;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-    position: fixed; /* Fixa o elemento na viewport */
-    bottom: 12px;      /* Posiciona o elemento no fundo da viewport */
-    right: 12px;       /* Posiciona o elemento no lado direito da viewport */
-    z-index: 10;  
-}
-
 .despesas-totais {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
+    gap: 12px;
 }
 
 .card-total {
-    width: 23%;
+    width: 24%;
     min-width: 300px;
-    border-radius: 14px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: .25rem;
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
     color: white;
 }
 
@@ -69,19 +56,16 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-items: center;
-    gap: 12px;
+    justify-content: space-between;
 }
 
 .filtro-select {
     width: 15%; 
-    border-radius: 14px;
     text-align: center;
 }
 
 .filtro-input {
-    width: 30%;
-    border-radius: 14px;
+    width: 63%;
 }
 
 #filtro-categoria option {

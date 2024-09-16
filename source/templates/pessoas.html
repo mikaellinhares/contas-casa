@@ -18,15 +18,13 @@ Pessoas
 <div class="main-container">
   <h1>Pessoas</h1>
   <div class="container-pessoas">
-    {% for i in '111111111111111'|make_list %}
-      {% for pessoa in pessoas %}
-        <div class="card-pessoa">
-          <h2>{{ pessoa.nome }}</h2>
-          <p class="display-saldo alert-{% if pessoa.saldo < 0 %}danger{% else %}success{% endif %}">
-            R$ {{ pessoa.saldo_formatado }}
-          </p>
-        </div>
-      {% endfor %}
+    {% for pessoa in pessoas %}
+      <div class="card-pessoa">
+        <h2>{{ pessoa.nome }}</h2>
+        <p class="display-saldo alert-{% if pessoa.saldo < 0 %}danger{% else %}success{% endif %}">
+          R$ {{ pessoa.saldo_formatado }}
+        </p>
+      </div>
     {% endfor %}
   </div>
 </div>

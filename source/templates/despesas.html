@@ -36,6 +36,7 @@ Despesas
         </div>
     </div>
     <div class="despesas-filtros">
+        <a class="btn btn-primary" href="{% url 'criar_despesa' %}"><span class="material-icons">add</span></a>
         <input id="filtro-nome" name="nome" class="filtro-input form-control" placeholder="Nome da despesa">
         <select id="filtro-categoria" name="categoria" class="filtro-select custom-select" onchange="selecionaCategoria(this.id)">
             <option value="" style="background-color: white; color: black;" selected>Todas Categorias</option>
@@ -83,10 +84,6 @@ Despesas
         </div>
         {% endfor %}
     </div>
-
-    <a href="{% url 'criar_despesa' %}">
-        <span id="adicionar-despesa" class="material-icons bi pe-none me-2">credit_card_off</span>
-    </a>
 </div>
 {% endblock %}
 

@@ -1,3 +1,1 @@
-function acessarPropriedade(propriedadeUrl) {
-    window.location.href = propriedadeUrl;
-}
+console.log('Carregou propriedades.js')

@@ -3,6 +3,8 @@ function alteraOpcaoPagamento() {
     var bgIconePagamento = document.querySelector('#bg-icone-pagamento');
     var descricaoPagamento = document.querySelector('#descricao-pagamento');
     var inputPagamento = document.querySelector('#input-pagamento');
+    var btnAddPessoa = document.querySelector('#btn-add-pessoa');
+    
     var iconTag
     var classAdd
     var classRemove
@@ -36,6 +38,8 @@ function alteraOpcaoPagamento() {
         document.querySelector(`#label-${key}`).style.display = elementsDisplay;
         document.querySelector(`#select-${key}`).style.display = elementsDisplay;
     });
+
+    btnAddPessoa.style.display = elementsDisplay;
 }
 
 function validarCampo(element) {

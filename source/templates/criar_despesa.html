@@ -17,59 +17,74 @@ Criar Despesa
 {% endblock%}
 
 {% block 'body' %}
-<h2>Nova Despesa</h2>
-
 <form id="form-criar-despesa" method="POST">   
     {% csrf_token %}
 
-    <label for="input-nome">Nome</label>
-    <input id="input-nome" name="nome" class="input-formulario form-control" type="text" placeholder="Nome da despesa">
+    <h2>Nova Despesa</h2>
 
+    <label for="input-nome">Nome</label>
+    <div class="input-formulario">
+        <input id="input-nome" name="nome" class="form-control" type="text" placeholder="Nome da despesa">
+    </div>
+    
     <label for="select-categoria">Categoria</label>
-    <select id="select-categoria" name="categoria" class="input-formulario custom-select" 
-        onchange="selecionaCategoria(this.id)">
-        <option value="" style="background-color: white; color: black;" disabled selected>Categoria da despesa</option>
-        {% for categoria in categorias %}
-        <option value="{{ categoria.id }}" style="background-color: {{ categoria.cor }};">{{ categoria.nome }}</option>
-        {% endfor %}
-    </select>
+    <div class="input-formulario">
+        <select id="select-categoria" name="categoria" class="custom-select" 
+            onchange="selecionaCategoria(this.id)">
+            <option value="" style="background-color: white; color: black;" disabled selected>Categoria da despesa</option>
+            {% for categoria in categorias %}
+            <option value="{{ categoria.id }}" style="background-color: {{ categoria.cor }};">{{ categoria.nome }}</option>
+            {% endfor %}
+        </select>
+        <button type="button" class="btn btn-primary""><span class="material-icons">add</span></button>
+    </div>
     
     <label for="group-valor">Valor</label>
-    <div id="group-valor" class="input-formulario input-group flex-nowrap">
-        <div class="input-group-prepend"><span class="input-group-text">R$</span></div>
-        <input id="input-valor" name="valor" type="number" min="0.01" step="0.01" class="form-control" placeholder="Valor">
+    <div class="input-formulario">
+        <div id="group-valor" class="input-group flex-nowrap">
+            <div class="input-group-prepend"><span class="input-group-text">R$</span></div>
+            <input id="input-valor" name="valor" type="number" min="0.01" step="0.01" class="form-control" placeholder="Valor">
+        </div>
     </div>
 
     <label for="input-vencimento">Vencimento</label>
-    <input id="input-vencimento" name="vencimento" class="input-formulario form-control is-valid" 
-        type="date" placeholder="Vencimento" value="{{ hoje }}">
+    <div class="input-formulario">
+        <input id="input-vencimento" name="vencimento" class="form-control is-valid" type="date" placeholder="Vencimento" value="{{ hoje }}">
+    </div>
 
     <label for="group-pagamento">Pagamento</label>
-    <div id="group-pagamento" class="input-formulario input-group flex-nowrap">
-        <div onclick="alteraOpcaoPagamento()" style="cursor: pointer" class="input-group-prepend">
-            <span id="bg-icone-pagamento" class="input-group-text bg-success">
-                <span id="icone-pagamento" class="material-icons bi pe-none me-2">check_box</span>
-            </span>
+    <div class="input-formulario">
+        <div id="group-pagamento" class="input-group flex-nowrap">
+            <div onclick="alteraOpcaoPagamento()" style="cursor: pointer" class="input-group-prepend">
+                <span id="bg-icone-pagamento" class="input-group-text bg-success">
+                    <span id="icone-pagamento" class="material-icons bi pe-none me-2">check_box</span>
+                </span>
+            </div>
+            <input id="descricao-pagamento" class="form-control" value="Com pagamento" disabled>
+            <input id="input-pagamento" name="pagamento" type="hidden" value="true">
         </div>
-        <input id="descricao-pagamento" class="form-control" value="Com pagamento" disabled>
-        <input id="input-pagamento" name="pagamento" type="hidden" value="true">
     </div>
 
     <label id="label-pessoa" for="select-pessoa">Pagador</label>
-    <select id="select-pessoa" name="pessoa" class="input-formulario custom-select">
-        <option value="" disabled selected>Pagador da despesa</option>
-        {% for pessoa in pessoas %}
-        <option value="{{ pessoa.id }}">{{ pessoa.nome }}</option>
-        {% endfor %}
-    </select>
+    <div class="input-formulario">
+        <select id="select-pessoa" name="pessoa" class="custom-select">
+            <option value="" disabled selected>Pagador da despesa</option>
+            {% for pessoa in pessoas %}
+            <option value="{{ pessoa.id }}">{{ pessoa.nome }}</option>
+            {% endfor %}
+        </select>
+        <button id="btn-add-pessoa" type="button" class="btn btn-primary""><span class="material-icons">add</span></button>
+    </div>
 
     <label id="label-forma-pagamento" for="select-forma-pagamento">Forma de pagamento</label>
-    <select id="select-forma-pagamento" name="forma_pagamento" class="input-formulario custom-select">
-        <option value="" disabled selected>Método de pagamento</option>
-        {% for sigla, forma in formas_pagamento.items %}
-        <option value="{{ sigla }}">{{ forma }}</option>
-        {% endfor %}
-    </select>
+    <div class="input-formulario">
+        <select id="select-forma-pagamento" name="forma_pagamento" class="custom-select">
+            <option value="" disabled selected>Método de pagamento</option>
+            {% for sigla, forma in formas_pagamento.items %}
+            <option value="{{ sigla }}">{{ forma }}</option>
+            {% endfor %}
+        </select>
+    </div>
 
     <button id="botao-salvar" class="btn btn-success" type="submit">Salvar</button>
 </form>
