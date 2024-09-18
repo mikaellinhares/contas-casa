@@ -3,7 +3,7 @@
 
     <div class="content-pagamentos">
         {% if valor_pendente > 0 %}
-            <form action="/despesas/{{ despesa_id }}/pagar" method="POST" class="form-pagamento">
+            <div class="form-pagamento">
                 {% csrf_token %}
 
                 <div class="form-pagamento-group">
@@ -44,8 +44,8 @@
                     <input id="input-descricao" name="descricao" class="form-control" type="text" placeholder="Descrição...">
                 </div>
                 
-                <button class="btn btn-success" type="submit">Pagar</button>
-            </form>
+                <button class="btn btn-success" onclick="pagarDespesa({{despesa_id}})">Pagar</button>
+            </div>
         {% endif %}
 
         {% if pagamentos %}

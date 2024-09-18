@@ -35,3 +35,66 @@ function mostrarPagamentos(despesaId) {
             console.error('Erro ao buscar pagamentos:', error);
         });
 }
+
+function validarCampos() {
+    let elemento
+    let todosValidos = true;
+
+    elemento = document.querySelector('input[name="valor"]');
+    if (elemento.value <= 0) {
+        elemento.classList.toggle('is-invalid', true);
+        todosValidos = false;
+    }
+
+    elemento = document.querySelector('select[name="forma_pagamento"]');
+    if (elemento.value == "") {
+        elemento.classList.toggle('is-invalid', true);
+        todosValidos = false;
+    }
+
+    elemento = document.querySelector('select[name="pessoa"]');
+    if (elemento.value == "") {
+        elemento.classList.toggle('is-invalid', true);
+        todosValidos = false;
+    }
+
+    elemento = document.querySelector('input[name="data"]');
+    if (elemento.value == "") {
+        elemento.classList.toggle('is-invalid', true);
+        todosValidos = false;
+    }
+
+    return todosValidos;
+}
+
+function pagarDespesa(despesaId) {
+    // Validar campos
+    if (!validarCampos()) { return }
+
+    csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    const data = {
+        valor: document.querySelector('input[name="valor"]').value,
+        forma_pagamento: document.querySelector('select[name="forma_pagamento"]').value,
+        pessoa: document.querySelector('select[name="pessoa"]').value,
+        data: document.querySelector('input[name="data"]').value,
+        descricao: document.querySelector('input[name="descricao"]').value,
+    };
+
+    fetch(`despesas/${despesaId}/pagar`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf_token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            fecharModal();
+            mostrarPagamentos(despesaId);
+        } else {
+            alert('Ocorreu um erro ao gerar o pagamento!');
+        }
+    });
+}

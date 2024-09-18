@@ -3,11 +3,11 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
 from django.contrib import messages
+from django.db import transaction
 from .models import Pessoa, Propriedade, Despesa, Categoria, Pagamento
 from datetime import datetime
-
-from django.http import HttpResponsePermanentRedirect
-from django.urls import reverse
+from decimal import Decimal
+import json
 
 
 # Create your views here.
@@ -86,16 +86,24 @@ def despesa_criar(request):
 
         if request.POST.get('pagamento', 'false') == 'true':
             try:
+                pessoa = Pessoa.objects.get(id=request.POST.get('pessoa'))
+                valor = request.POST.get('valor')
+
                 pagamento = Pagamento(
                     despesa=despesa,
-                    pessoa=Pessoa.objects.get(id=request.POST.get('pessoa')),
-                    valor=request.POST.get('valor'),
+                    pessoa=pessoa,
+                    valor=valor,
                     forma_pagamento=request.POST.get('forma_pagamento'),
                     descricao='Pagamento Automático',
                     data=datetime.now()
                 )
                 pagamento.save()
+
+                pessoa.saldo -= Decimal(valor)
+                pessoa.save()
+
                 messages.success(request, 'Pagamento realizado com sucesso!')
+                
             except Exception as error:
                 messages.error(request, f'Ocorreu um erro ao tentar realizar o pagamento da despesa:\n{error}')
         else:
@@ -107,7 +115,7 @@ def despesa_criar(request):
 def despesa_pagamentos(request, despesa_id: int):
     despesa = get_object_or_404(Despesa, id=despesa_id)
 
-    pagamentos = despesa.pagamento_set.all()
+    pagamentos = despesa.pagamento_set.all().order_by('-data', '-valor')
     valor_pendente = despesa.valor_pendente()
 
     context = {
@@ -130,28 +138,35 @@ def despesa_pagamentos(request, despesa_id: int):
 
 @require_POST
 def despesa_pagar(request, despesa_id: int):
-    despesa = get_object_or_404(Despesa, id=despesa_id)
+    try:
+        body = json.loads(request.body.decode('utf-8'))
 
-    valor           = request.POST.get('valor')
-    forma_pagamento = request.POST.get('forma_pagamento')
-    descricao       = request.POST.get('descricao')
-    pessoa          = request.POST.get('pessoa')
-    data            = request.POST.get('data')
+        valor           = body.get('valor')
+        forma_pagamento = body.get('forma_pagamento')
+        descricao       = body.get('descricao')
+        pessoa_id       = body.get('pessoa')
+        data_str        = body.get('data')
 
-    pessoa          = Pessoa.objects.get(id=pessoa)
-    data            = datetime.strptime(data, '%Y-%m-%d')
+        despesa         = get_object_or_404(Despesa, id=despesa_id)
+        pessoa          = get_object_or_404(Pessoa, id=pessoa_id)
+        data            = datetime.strptime(data_str, '%Y-%m-%d')
 
-    pagamento = Pagamento(
-        despesa=despesa,
-        pessoa=pessoa,
-        valor=valor,
-        forma_pagamento=forma_pagamento,
-        descricao=descricao,
-        data=data
-    )
+        with transaction.atomic():
+            pagamento = Pagamento(
+                despesa=despesa,
+                pessoa=pessoa,
+                valor=valor,
+                forma_pagamento=forma_pagamento,
+                descricao=descricao,
+                data=data
+            )
+            pagamento.save()
 
-    pagamento.save()
+            pessoa.saldo -= Decimal(valor)
+            pessoa.save()
 
-    # TODO Descontar do saldo da pessoa
-
-    return redirect('despesa_pagamentos', despesa_id)
+        return HttpResponse(status=201)
+    
+    except Exception as erro:
+        print(erro)
+        return HttpResponse(status=400)
