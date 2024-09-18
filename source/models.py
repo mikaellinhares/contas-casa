@@ -82,6 +82,9 @@ class Despesa(models.Model):
     def __str__(self) -> str:
         return f'{self.nome} - R${self.valor}'
 
+    def valor_pendente(self) -> float:
+        return self.valor - sum([pagamento.valor for pagamento in self.pagamento_set.all()])
+
     def somar_valores(despesas) -> float:
         return sum([despesa.valor for despesa in despesas])
 
@@ -104,7 +107,7 @@ class Pagamento(models.Model):
     valor = models.DecimalField(max_digits=15, decimal_places=2)
     forma_pagamento = models.CharField(max_length=2, choices=PAYMENT_METHODS)
     descricao = models.TextField(max_length=255, null=True, blank=True)
-    data = models.DateTimeField()
+    data = models.DateField()
 
     def __str__(self):
         return f'{self.pessoa} - {self.despesa} - R${self.valor}'

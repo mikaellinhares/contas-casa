@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
 from django.contrib import messages
 from .models import Pessoa, Propriedade, Despesa, Categoria, Pagamento
@@ -53,7 +54,7 @@ def despesas(request):
     return render(request, template_name='despesas.html', context=context)
 
 
-def criar_despesa(request):
+def despesa_criar(request):
     if request.method == 'GET':
         hoje = datetime.today().strftime('%Y-%m-%d')
         categorias = Categoria.objects.all()
@@ -67,7 +68,7 @@ def criar_despesa(request):
             'formas_pagamento': formas_pagamento 
         }
 
-        return render(request, template_name='criar_despesa.html', context=context)
+        return render(request, template_name='despesa_criar.html', context=context)
     
     elif request.method == 'POST':
         try:
@@ -100,11 +101,57 @@ def criar_despesa(request):
         else:
             messages.error(request, f'Não foi registrado pagamento para a despesa')
 
-        return redirect('criar_despesa')
+        return redirect('despesa_criar')
 
 
 def despesa_pagamentos(request, despesa_id: int):
     despesa = get_object_or_404(Despesa, id=despesa_id)
+
     pagamentos = despesa.pagamento_set.all()
-    pagamentos_html = render_to_string('despesa_pagamentos.html', context={'pagamentos': pagamentos})
+    valor_pendente = despesa.valor_pendente()
+
+    context = {
+        'despesa_id': despesa.id,
+        'pagamentos': pagamentos,
+        'valor_pendente': valor_pendente,
+        'valor_pendente_str': str(valor_pendente)
+    }
+    
+    if valor_pendente > 0:
+        context['categorias'] = Categoria.objects.all()
+        context['pessoas'] = Propriedade.objects.get(id=request.session['id_propriedade']).pessoas.all()
+        context['formas_pagamento'] = Pagamento.PAYMENT_METHODS
+        context['hoje'] = datetime.today().strftime('%Y-%m-%d')
+
+    pagamentos_html = render_to_string('despesa_pagamentos.html', context=context, request=request)
+
     return JsonResponse(pagamentos_html, safe=False)
+
+
+@require_POST
+def despesa_pagar(request, despesa_id: int):
+    despesa = get_object_or_404(Despesa, id=despesa_id)
+
+    valor           = request.POST.get('valor')
+    forma_pagamento = request.POST.get('forma_pagamento')
+    descricao       = request.POST.get('descricao')
+    pessoa          = request.POST.get('pessoa')
+    data            = request.POST.get('data')
+
+    pessoa          = Pessoa.objects.get(id=pessoa)
+    data            = datetime.strptime(data, '%Y-%m-%d')
+
+    pagamento = Pagamento(
+        despesa=despesa,
+        pessoa=pessoa,
+        valor=valor,
+        forma_pagamento=forma_pagamento,
+        descricao=descricao,
+        data=data
+    )
+
+    pagamento.save()
+
+    # TODO Descontar do saldo da pessoa
+
+    return redirect('despesa_pagamentos', despesa_id)

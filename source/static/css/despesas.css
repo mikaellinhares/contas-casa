@@ -42,15 +42,6 @@
     font-size: 40px;
 }
 
-.botao-pagamentos {
-    border-radius: 14px;
-}
-
-.icone-botao-pagamentos {
-    margin: 4px;
-    font-size: 24px;
-}
-
 .despesas-filtros {
     width: 100%;
     display: flex;
@@ -125,10 +116,10 @@
     text-align: center;
     display: block;
     width: 100%;
-    cursor: pointer;
 }
 
-.display-data {
+.btn-pagamentos {
+    width: calc(100% - 24px);
     margin-bottom: 12px;
 }
 
@@ -141,7 +132,7 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
-    padding: 24px;
+    padding: 5vh 12px;
 }
 
 .display-pagamentos {
@@ -149,6 +140,7 @@
     border-radius: 8px;
     background-color: #0c2b68;
     padding: 16px;
+    max-height: 90vh;
 }
 
 .titulo-pagamentos {
@@ -159,22 +151,39 @@
     padding: 10px;
 }
 
+.content-pagamentos {
+    max-height: 75%;
+    width: 100%;
+    overflow: auto;
+    margin-bottom: 16px;
+}
+
+.content-pagamentos::-webkit-scrollbar {
+    display: none;
+}
+
+.form-pagamento {
+    background-color: #1F43B6;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    gap: 20px;
+}
+
+.form-pagamento-group {
+    display: flex;
+    flex-direction: column;
+}
+
 .list-pagamentos {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin: 16px 0px;
+    margin-top: 16px;
     overflow: auto;
-    height: 78%;
-}
-
-.list-pagamentos::-webkit-scrollbar-thumb {
-    border: 3px solid #e3e9f7;
-}
-
-.list-pagamentos::-webkit-scrollbar-track {
-    background: #e3e9f7;
-    border-radius: 20px;
 }
 
 .card-pagamento {
@@ -191,7 +200,7 @@
 .infos-pagamento {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 12px;
 }
 

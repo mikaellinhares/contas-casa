@@ -36,7 +36,7 @@ Despesas
         </div>
     </div>
     <div class="despesas-filtros">
-        <a class="btn btn-primary" href="{% url 'criar_despesa' %}"><span class="material-icons">add</span></a>
+        <a class="btn btn-primary" href="{% url 'despesa_criar' %}"><span class="material-icons">add</span></a>
         <input id="filtro-nome" name="nome" class="filtro-input form-control" placeholder="Nome da despesa">
         <select id="filtro-categoria" name="categoria" class="filtro-select custom-select" onchange="selecionaCategoria(this.id)">
             <option value="" style="background-color: white; color: black;" selected>Todas Categorias</option>
@@ -60,19 +60,24 @@ Despesas
         {% for despesa in despesas %}
         <div class="card-despesa">
             {% if despesa.pagamento_set.all %}
-                <span onclick="mostrarPagamentos({{ despesa.id }})" class="display-situacao alert-success" >Pago</span>
+                {% if despesa.valor_pendente > 0 %}
+                    <span class="display-situacao alert-info">Pago parcial</span>
+                {% else %}
+                    <span class="display-situacao alert-success">Pago</span>
+                {% endif %}
             {% elif hoje == despesa.data_vencimento %}
-                <span onclick="mostrarPagamentos({{ despesa.id }})" class="display-situacao alert-info">Vence hoje</span>
+                <span class="display-situacao alert-info">Vence hoje</span>
             {% elif hoje > despesa.data_vencimento %}
-                <span onclick="mostrarPagamentos({{ despesa.id }})" class="display-situacao alert-danger">Vencido</span>
+                <span class="display-situacao alert-danger">Vencido</span>
             {% else %}
-                <span onclick="mostrarPagamentos({{ despesa.id }})" class="display-situacao alert-warning">Pendente</span>
+                <span class="display-situacao alert-warning">Pendente</span>
             {% endif %}
 
             <p class="despesa-texto">{{ despesa.nome }}</p>
             <span class="display-valor despesa-texto">R$ {{ despesa.valor }}</span>
             <span class="display-categoria despesa-texto" style="background-color: {{ despesa.categoria.cor }}">{{ despesa.categoria }}</span>
             <span class="display-data despesa-texto">{{ despesa.data_criacao }}</span>
+            <button class="btn-pagamentos btn btn-success" onclick="mostrarPagamentos({{ despesa.id }})">Pagamentos</button>
         </div>
         {% endfor %}
     </div>
@@ -81,5 +86,4 @@ Despesas
 
 {% block 'modal' %}
 <div id="modal-pagamentos"></div>
-<div id="modal-pagar"></div>
 {% endblock %}

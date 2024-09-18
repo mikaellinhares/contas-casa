@@ -10,7 +10,8 @@ urlpatterns = [
     # path('metas/', views.metas, name='metas'),
     # path('categorias/', views.categorias, name='categorias'),
     path('despesas', views.despesas, name='despesas'),
-    path('despesas/criar', views.criar_despesa, name='criar_despesa'),
+    path('despesas/criar', views.despesa_criar, name='despesa_criar'),
     path('despesas/<int:despesa_id>/pagamentos', views.despesa_pagamentos, name='despesa_pagamentos'),
+    path('despesas/<int:despesa_id>/pagar', views.despesa_pagar, name='despesa_pagar'),
     # path('rendas/', views.rendas, name='rendas')
 ]

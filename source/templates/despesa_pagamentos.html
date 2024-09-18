@@ -1,21 +1,71 @@
 <div class="display-pagamentos">
     <h2 class="titulo-pagamentos">Pagamentos</h2>
-    <div class="list-pagamentos">
-    {% for pagamento in pagamentos %}
-        <div class="card-pagamento">
-            <div class="infos-pagamento">
-                <span>R$ {{ pagamento.valor }}</span>
-                <span>{{ pagamento.get_forma_pagamento_display }}</span>
-                <span>{{ pagamento.data }}</span> 
-                <span>{{ pagamento.pessoa }}</span>
-                <span>{{ pagamento.descricao }}</span>
+
+    <div class="content-pagamentos">
+        {% if valor_pendente > 0 %}
+            <form action="/despesas/{{ despesa_id }}/pagar" method="POST" class="form-pagamento">
+                {% csrf_token %}
+
+                <div class="form-pagamento-group">
+                    <label for="group-valor">Valor</label>
+                    <div id="group-valor" class="input-group flex-nowrap">
+                        <div class="input-group-prepend"><span class="input-group-text">R$</span></div>
+                        <input id="input-valor" name="valor" type="number" min="0.01" step="0.01" class="form-control" placeholder="Valor" value="{{ valor_pendente_str }}">
+                    </div>
+                </div>
+
+                <div class="form-pagamento-group">
+                    <label id="label-forma-pagamento" for="select-forma-pagamento">Forma de pagamento</label>
+                    <select id="select-forma-pagamento" name="forma_pagamento" class="custom-select">
+                        <option value="" disabled selected>Método de pagamento</option>
+                        {% for sigla, forma in formas_pagamento.items %}
+                        <option value="{{ sigla }}">{{ forma }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-pagamento-group">
+                    <label id="label-pessoa" for="select-pessoa">Pagador</label>
+                    <select id="select-pessoa" name="pessoa" class="custom-select">
+                        <option value="" disabled selected>Pagador da despesa</option>
+                        {% for pessoa in pessoas %}
+                        <option value="{{ pessoa.id }}">{{ pessoa.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-pagamento-group">
+                    <label for="input-data">Data do pagamento</label>
+                    <input id="input-data" name="data" class="form-control" type="date" placeholder="Vencimento" value="{{ hoje }}">
+                </div>
+
+                <div class="form-pagamento-group">
+                    <label for="input-vencimento">Descrição</label>
+                    <input id="input-descricao" name="descricao" class="form-control" type="text" placeholder="Descrição...">
+                </div>
+                
+                <button class="btn btn-success" type="submit">Pagar</button>
+            </form>
+        {% endif %}
+
+        {% if pagamentos %}
+            <div class="list-pagamentos">
+                {% for pagamento in pagamentos %}
+                <div class="card-pagamento">
+                    <div class="infos-pagamento">
+                        <span>R$ {{ pagamento.valor }}</span>
+                        <span>{{ pagamento.get_forma_pagamento_display }}</span>
+                        <span>{{ pagamento.data }}</span>
+                        <span>{{ pagamento.pessoa }}</span>
+                        <span>{{ pagamento.descricao }}</span>
+                    </div>
+                    <span class="cancelar-pagamento material-icons">close</span>
+                </div>
+                {% endfor %}
             </div>
-            <span class="cancelar-pagamento material-icons">close</span>
-        </div>
-    {% endfor %}
+        {% endif %}
     </div>
     <div class="acoes-pagamentos">
-        <button class="btn btn-success" onclick="">Pagar</button>
         <button class="btn btn-danger" onclick="fecharModal()">Fechar</button>
     </div>
 </div>
