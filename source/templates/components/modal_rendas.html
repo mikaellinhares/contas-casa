@@ -1,0 +1,80 @@
+<!-- Temporário -->
+ {% load static %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<!-- -->
+
+<style>
+    body {
+        background-color: black;
+    }
+
+    .display-renda {
+        background-color: #0c2b68;
+        color: white;
+        width: 100%;
+        height: 80%;
+        padding: 16px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .display-renda h1 {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .form-adicionar-renda {
+        background-color: #1F43B6;
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<div class="display-renda">
+    <h1>Renda de Mikael</h1>
+
+    <div class="form-adicionar-renda">
+        <div class="form-group">
+            <label for="input-nome">Nome da Renda</label>
+            <input id="input-nome" name="nome" type="text"class="form-control" placeholder="Nome...">      
+        </div>
+        <div class="form-group">
+            <label for="input-valor">Valor da Renda</label>
+            <input id="input-valor" name="valor" type="number" min="0.01" step="0.01" class="form-control" placeholder="Valor...">      
+        </div>
+        <div class="form-group">
+            <label for="input-data">Data da Renda</label>
+            <input id="input-data" name="data" type="date" class="form-control">
+        </div>
+        <button class="btn btn-success">Salvar</button>
+    </div>
+
+    <div class="list-rendas">
+        <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Salário BMSoft</td>
+                <td>R$ 1.000.000,00</td>
+                <td>18 de Setembro de 2024</td>
+                <td><button class="btn btn-danger">Cancelar</button></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <button class="btn btn-danger">Fechar</button>
+</div>

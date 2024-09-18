@@ -23,16 +23,14 @@ h1 {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 12px;
 }
 
 .card-pessoa {
-    width: calc((100% - 48px) / 5);
-    min-width: 250px;
     border-radius: 12px;
-    background-color: white;
+    background-color: #0c2b68;
     color: black;
     font-size: 2.2rem !important;
 
@@ -40,6 +38,8 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    padding: 12px;
+    gap: 12px;
     
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
@@ -50,7 +50,6 @@ h1 {
     color: white;
     text-align: center;
     width: 100%;
-    padding: 12px;
     margin: 0;
 }
 
@@ -59,6 +58,18 @@ h1 {
     height: 100% !important;
     text-align: center;
     margin: 0px;
-    border-radius: 0 0 12px 12px;
+    border-radius: 12px;
     padding: 12px;
+}
+
+.acoes-pessoa {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.acoes-pessoa .btn {
+    width: 50%;
 }

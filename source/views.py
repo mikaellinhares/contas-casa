@@ -170,3 +170,26 @@ def despesa_pagar(request, despesa_id: int):
     except Exception as erro:
         print(erro)
         return HttpResponse(status=400)
+
+
+def pessoa_rendas(request, pessoa_id: int):
+    pessoa = get_object_or_404(Pessoa, id=pessoa_id)
+
+    rendas = pessoa.renda_set.all().order_by('-data', '-valor')
+
+    context = {
+        'pessoa_id': pessoa.id,
+        'rendas': rendas,
+    }
+
+    if request.method == "GET":
+        return render(request=request, template_name='components/modal_rendas.html', context=context)
+    else:
+        rendas_html = render_to_string('components/modal_rendas.html', context=context, request=request)
+        return JsonResponse(rendas_html, safe=False)
+
+
+def pessoa_adicionar_renda(request, pessoa_id: int):
+    pessoa = get_object_or_404(Pessoa, id=pessoa_id)
+    print(pessoa)
+    return ""

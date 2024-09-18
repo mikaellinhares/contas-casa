@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
     padding: 24px;
     padding-bottom: 0;
     overflow: auto;
@@ -21,6 +21,7 @@
 }
 
 .card-total {
+    flex-grow: 1;
     width: 24%;
     min-width: 300px;
     border-radius: .25rem;
@@ -48,14 +49,17 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
 }
 
 .filtro-select {
+    flex-grow: 1;
     width: 15%; 
     text-align: center;
 }
 
 .filtro-input {
+    flex-grow: 1;
     width: 63%;
 }
 
@@ -69,17 +73,20 @@
 
 .despesas-lista {
     width: 100%;
+    height: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
-.despesas-lista::-webkit-scrollbar { 
+/* .despesas-lista::-webkit-scrollbar { 
 	display: none;
-}
+} */
 
 .card-despesa {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -181,7 +188,7 @@
 .list-pagamentos {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     margin-top: 16px;
     overflow: auto;
 }

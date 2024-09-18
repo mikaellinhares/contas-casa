@@ -24,6 +24,10 @@ Pessoas
         <p class="display-saldo alert-{% if pessoa.saldo < 0 %}danger{% else %}success{% endif %}">
           R$ {{ pessoa.saldo_formatado }}
         </p>
+        <div class="acoes-pessoa">
+          <button class="btn btn-success">Renda</button>
+          <button class="btn btn-dark">Histórico</button>
+        </div>
       </div>
     {% endfor %}
   </div>
